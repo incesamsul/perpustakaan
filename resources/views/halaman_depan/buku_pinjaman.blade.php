@@ -25,10 +25,12 @@
                 <td>Buku</td>
                 <td>jml hari</td>
                 <td>jml Buku</td>
+                @if ($title != 'Belum diambil')
                 <td>Tgl pinjam</td>
                 <td>Tgl kembali</td>
                 <td>Terlambat</td>
                 <td>Denda</td>
+                @endif
                 <td>Aksi</td>
             </tr>
             @foreach ($buku as $row)
@@ -41,13 +43,15 @@
                     </td>
                     <td class="align-middle">{{ $row->jml_hari }}</td>
                     <td class="align-middle">{{ $row->jml_buku }}</td>
-                    <td class="align-middle">{{ $row->tgl_pinjam == '' ? 'none' : $row->tgl_pinjam  }}</td>
-                    <td class="align-middle">{{ $row->tgl_kembali == '' ? 'none' : $row->tgl_kembali  }}</td>
-                    <?php
-                    $jmlTerlambat = dateDiff($row->tgl_pinjam,$tanggal_hari_ini) - $row->jml_hari;
-                     ?>
-                    <td class="align-middle">{{ $jmlTerlambat < 0 ? '0' : $jmlTerlambat }} Hari</td>
-                    <td class="align-middle">{{ $jmlTerlambat < 0 ? '0' : 'Rp. '. number_format($jmlTerlambat * 500) }} </td>
+                    @if ($title != 'Belum diambil')
+                        <td class="align-middle">{{ $row->tgl_pinjam == '' ? 'none' : $row->tgl_pinjam  }}</td>
+                        <td class="align-middle">{{ $row->tgl_kembali == '' ? 'none' : $row->tgl_kembali  }}</td>
+                        <?php
+                        $jmlTerlambat = dateDiff($row->tgl_pinjam,$tanggal_hari_ini) - $row->jml_hari;
+                        ?>
+                        <td class="align-middle">{{ $jmlTerlambat < 0 ? '0' : $jmlTerlambat }} Hari</td>
+                        <td class="align-middle">{{ $jmlTerlambat < 0 ? '0' : 'Rp. '. number_format($jmlTerlambat * 500) }} </td>
+                    @endif
                     <td class="align-middle">
                     @if ($url == 'pinjaman_selesai')
                         <span class="badge badge-secondary">none</span>

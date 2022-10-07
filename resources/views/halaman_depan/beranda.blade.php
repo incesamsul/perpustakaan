@@ -156,7 +156,7 @@
             <h2>
                 Daftar Buku
               </h2>
-              <button class="btn btn-light">
+              <button class="btn btn-light" id="btn-search">
                   <i class="fas fa-search"></i>
               </button>
         </div>
@@ -276,4 +276,13 @@
 
 <!-- end info section -->
 
+@endsection
+@section('script')
+<script>
+
+    $('#btn-search').on('click',function(){
+        alert('hwta')
+    })
+
+</script>
 @endsection
