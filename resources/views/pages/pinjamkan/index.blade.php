@@ -9,8 +9,8 @@
                     <h4>Scan buku pinjaman</h4>
 
                 </div>
-                <div class="card-body p-0">
-                    <div style="width: 100%" id="reader"></div>
+                <div class="card-body p-0 d-flex align-items-center justify-content-center">
+                    <div style="width: 40%" id="reader"></div>
 
 
                 </div>
