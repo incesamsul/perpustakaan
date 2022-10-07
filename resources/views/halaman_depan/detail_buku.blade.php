@@ -28,6 +28,9 @@
             <p>Tahun terbit : {{ $buku->tahun_terbit }}</p>
             <p>Stok : {{ $buku->stok }}</p>
             @if ($buku->stok > 0)
+            @if ($pinjaman_user)
+            <span class="alert alert-danger">Pinjaman bisa dilakukan setelah pinjaman sebelumnya selesai</span>
+            @else
             <div class="form">
                 <form action="{{ URL::to('/simpan_ke_keranjang') }}" method="POST">
                     @csrf
@@ -45,6 +48,7 @@
                     </div>
                 </form>
             </div>
+            @endif
             @else
             <span class="alert alert-info">Stok buku habis</span>
             @endif

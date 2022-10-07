@@ -6,6 +6,7 @@ use App\Models\Buku;
 use App\Models\Kategori;
 use App\Models\Member;
 use App\Models\Pengunjung;
+use App\Models\Pinjam;
 use DateTime;
 use DateTimeZone;
 
@@ -64,6 +65,7 @@ class Home extends Controller
         } else {
             $data['buku'] = Buku::where('id_buku', $idBuku)->first();
         }
+        $data['pinjaman_user'] = Pinjam::where('id_user', auth()->user()->id)->where('status', '!=', 'selesai')->first();
         return view('halaman_depan.detail_buku', $data);
     }
 }
