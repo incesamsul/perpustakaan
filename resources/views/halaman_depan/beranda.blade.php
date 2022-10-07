@@ -148,19 +148,24 @@
 
 <!-- catagory section -->
 
-<section class="buku_section layout_padding">
+<section class="buku_section layout_padding" id="buku">
   <div class="catagory_container">
     <div class="container ">
       <div class="heading_container heading_center">
-        <h2>
-          Daftar Buku
-        </h2>
+        <div class="serach_and_title mb-4 pb-3 d-flex">
+            <h2>
+                Daftar Buku
+              </h2>
+              <button class="btn btn-light">
+                  <i class="fas fa-search"></i>
+              </button>
+        </div>
 
       </div>
       <div class="row">
         @if (count($buku) > 0)
         @foreach ($buku as $row)
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <a href="{{ URL::to('/detail_buku/' . $row->id_buku) }}" class="text-secondary">
                 <div class="card books-card d-flex flex-column  border-0 soft-shadow">
                     <img src="{{ asset('data/gambar_buku/' . $row->gambar) }}" alt="buku">
@@ -191,7 +196,7 @@
 
 <!-- info section -->
 
-<section class="info_section layout_padding2">
+<section class="info_section layout_padding2" id="tentang_kami">
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-lg-3 info-col">

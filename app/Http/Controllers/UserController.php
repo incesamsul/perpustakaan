@@ -19,6 +19,9 @@ class UserController extends Controller
         $data['title'] = 'Belum diambil';
         $data['url'] = 'belum_diambil';
         $data['buku'] = Pinjam::where('status', 'blm_diambil')->get();
+        $timezone = 'Asia/Makassar';
+        $date = new DateTime('now', new DateTimeZone($timezone));
+        $data['tanggal_hari_ini'] = $date->format('Y-m-d');
         return view('halaman_depan.buku_pinjaman', $data);
     }
 
@@ -39,6 +42,9 @@ class UserController extends Controller
         $data['url'] = 'pinjaman_selesai';
         $data['title'] = 'Selesai dipinjam';
         $data['buku'] = Pinjam::where('status', 'selesai')->get();
+        $timezone = 'Asia/Makassar';
+        $date = new DateTime('now', new DateTimeZone($timezone));
+        $data['tanggal_hari_ini'] = $date->format('Y-m-d');
         return view('halaman_depan.buku_pinjaman', $data);
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="scroll-behavior: smooth;">
 
 <head>
   <!-- Basic -->
@@ -81,13 +81,13 @@
                 <a class="nav-link pl-lg-0" href="{{ URL::to('/') }}">Beranda <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ URL::to('/') }}"> Buku</a>
+                <a class="nav-link" href="{{ URL::to('/#buku') }}"> Buku</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ URL::to('/') }}"> Kategori</a>
+                <a class="nav-link" href="{{ URL::to('/#kategori') }}"> Kategori</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ URL::to('/') }}">Tentang kami</a>
+                <a class="nav-link" href="{{ URL::to('/#tentang_kami') }}">Tentang kami</a>
               </li>
             </ul>
             {{-- <from class="search_form">
