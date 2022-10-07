@@ -70,6 +70,12 @@
 								<p>Pengguna</p>
 							</a>
 						</li>
+                        <li class="nav-item" id="liAnggota">
+							<a href="{{ URL::to('/admin/anggota') }}" class="collapsed" >
+								<i class="fas fa-user"></i>
+								<p>Anggota</p>
+							</a>
+						</li>
                         <li class="nav-item" id="liKategori">
 							<a href="{{ URL::to('/admin/kategori') }}" class="collapsed" >
 								<i class="fas fa-swatchbook"></i>
@@ -95,6 +101,52 @@
 							</a>
 						</li>
 
+
+
+                        @endif
+
+
+                        @if (auth()->user()->role == 'pustakawan')
+
+                        <li class="nav-item" id="liKategori">
+							<a href="{{ URL::to('/admin/kategori') }}" class="collapsed" >
+								<i class="fas fa-swatchbook"></i>
+								<p>Kategori</p>
+							</a>
+						</li>
+                        <li class="nav-item" id="liBuku">
+							<a href="{{ URL::to('/admin/buku') }}" class="collapsed" >
+								<i class="fas fa-book"></i>
+								<p>Buku</p>
+							</a>
+						</li>
+                        <li class="nav-item" id="liPinjamkan">
+							<a href="{{ URL::to('/admin/pinjamkan') }}" class="collapsed" >
+								<i class="fas fa-calendar"></i>
+								<p>Peminjaman</p>
+							</a>
+						</li>
+                        <li class="nav-item" id="liPengembalian">
+							<a href="{{ URL::to('/admin/pengembalian') }}" class="collapsed" >
+								<i class="fas fa-calendar"></i>
+								<p>Pengembalian</p>
+							</a>
+						</li>
+                        @endif
+
+                        @if (auth()->user()->role == 'Administrator' || auth()->user()->role == 'pustakawan')
+                        <li class="nav-item" id="liPengunjung">
+							<a href="{{ URL::to('/pengunjung') }}" class="collapsed" >
+								<i class="fas fa-qrcode"></i>
+								<p>Pengunjung</p>
+							</a>
+						</li>
+                        <li class="nav-item" id="liDaftarPengunjung">
+							<a href="{{ URL::to('/daftar_pengunjung') }}" class="collapsed" >
+								<i class="fas fa-list"></i>
+								<p>Daftar Pengunjung</p>
+							</a>
+						</li>
                         @endif
 						<li class="mx-4 mt-2">
 							<a href="{{ URL::to("logout") }}" class="btn bg-main text-white btn-block"><span class="btn-label mr-2"> <i class="fa fa-sign-out-alt"></i> </span>Logout</a>

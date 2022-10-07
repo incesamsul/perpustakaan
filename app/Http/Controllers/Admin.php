@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Pinjam;
+use DateTime;
+use DateTimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -37,8 +39,37 @@ class Admin extends Controller
         $data['headerTitle'] = 'Peminjaman';
         $data['headerSubTitle'] = 'Selamat Datang | Aplikasi perpustakaan';
         $data['sidebar'] = 'liPinjamkan';
-        $data['buku'] = Pinjam::where('status','diambil')->get();
-        return view('pages.pinjamkan.index',$data);
+        $data['buku'] = Pinjam::where('status', 'diambil')->get();
+        return view('pages.pinjamkan.index', $data);
+    }
+
+    public function pinjamkanBuku($idPinjam)
+    {
+        $timezone = 'Asia/Makassar';
+        $date = new DateTime('now', new DateTimeZone($timezone));
+        $tanggal = $date->format('Y-m-d');
+        $localTime = $date->format('H:i:s');
+
+        Pinjam::where('id_pinjam', $idPinjam)->update([
+            'status' => 'diambil',
+            'tgl_pinjam' => $tanggal
+        ]);
+
+        return redirect()->back()->with('message', 'buku berhasil dipinjamkan');
+    }
+
+    public function kembalikanBuku($idPinjam)
+    {
+        $timezone = 'Asia/Makassar';
+        $date = new DateTime('now', new DateTimeZone($timezone));
+        $tanggal = $date->format('Y-m-d');
+        $localTime = $date->format('H:i:s');
+
+        Pinjam::where('id_pinjam', $idPinjam)->update([
+            'status' => 'selesai',
+            'tgl_kembali' => $tanggal
+        ]);
+        return redirect()->back()->with('message', 'buku berhasil kembalikan');
     }
 
     public function pengembalian()
@@ -46,8 +77,8 @@ class Admin extends Controller
         $data['headerTitle'] = 'Pengembalian';
         $data['headerSubTitle'] = 'Selamat Datang | Aplikasi perpustakaan';
         $data['sidebar'] = 'liPengembalian';
-        $data['buku'] = Pinjam::where('status','selesai')->get();
-        return view('pages.pinjamkan.index',$data);
+        $data['buku'] = Pinjam::where('status', 'selesai')->get();
+        return view('pages.pinjamkan.index', $data);
     }
 
     public function profileUser()
@@ -96,7 +127,7 @@ class Admin extends Controller
         User::create([
             'name' => $request->nama,
             'email' => $request->email,
-            'password' => bcrypt($request->nama),
+            'password' => bcrypt($request->email),
             'role' => $request->tipe_pengguna,
         ]);
         return redirect('/admin/pengguna')->with('message', 'Pengguna Berhasil di tambahkan');

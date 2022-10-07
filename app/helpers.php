@@ -10,22 +10,20 @@ use PhpParser\Node\Expr\FuncCall;
 
 use function PHPUnit\Framework\isNull;
 
-function getKategoriMenu(){
-    return KategoriModel::all();
+
+function dateDiff($tgl_mulai, $tgl_akhir)
+{
+    // $tgl_mulai = "2009-06-24";
+    // $tgl_akhir = "2009-06-26";
+
+    $diff = abs(strtotime($tgl_akhir) - strtotime($tgl_mulai));
+
+    $years = floor($diff / (365 * 60 * 60 * 24));
+    $months = floor(($diff - $years * 365 * 60 * 60 * 24) / (30 * 60 * 60 * 24));
+    $days = floor(($diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24) / (60 * 60 * 24));
+
+    return $days;
 }
-
-function getNamaKategoriById($idKategori){
-    return KategoriModel::where('id_kategori',$idKategori)->first();
-}
-
-
-function isThisMyFavorit($idInfo){
-    return FavoritModel::where([
-        'id_user' => auth()->user()->id,
-        'id_info' => $idInfo
-    ])->first();
-}
-
 function removeSpace($string)
 {
     return str_replace(" ", "", $string);

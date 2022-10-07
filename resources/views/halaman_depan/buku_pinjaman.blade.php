@@ -23,8 +23,12 @@
             <tr>
                 <td>#</td>
                 <td>Buku</td>
-                <td>Jumlah hari</td>
-                <td>Jumlah Buku</td>
+                <td>jml hari</td>
+                <td>jml Buku</td>
+                <td>Tgl pinjam</td>
+                <td>Tgl kembali</td>
+                <td>Terlambat</td>
+                <td>Denda</td>
                 <td>Aksi</td>
             </tr>
             @foreach ($buku as $row)
@@ -37,8 +41,23 @@
                     </td>
                     <td class="align-middle">{{ $row->jml_hari }}</td>
                     <td class="align-middle">{{ $row->jml_buku }}</td>
+                    <td class="align-middle">{{ $row->tgl_pinjam == '' ? 'none' : $row->tgl_pinjam  }}</td>
+                    <td class="align-middle">{{ $row->tgl_kembali == '' ? 'none' : $row->tgl_kembali  }}</td>
+                    <?php
+                    $jmlTerlambat = dateDiff($row->tgl_pinjam,$tanggal_hari_ini) - $row->jml_hari;
+                     ?>
+                    <td class="align-middle">{{ $jmlTerlambat < 0 ? '0' : $jmlTerlambat }} Hari</td>
+                    <td class="align-middle">{{ $jmlTerlambat < 0 ? '0' : 'Rp. '. number_format($jmlTerlambat * 500) }} </td>
                     <td class="align-middle">
+                    @if ($url == 'pinjaman_selesai')
+                        <span class="badge badge-secondary">none</span>
+                        @else
+                        @if ($title == 'Belum diambil')
                         <button data-qrcode="{{ URL::to('/pustakawan/pinjamkan/' . $row->id_pinjam) }}" class="btn btn-lihat bg-main text-white"  data-toggle="modal" data-target="#qrcode" data-keyboard="false" data-backdrop="static">Lihat</button>
+                        @else
+                        <button data-qrcode="{{ URL::to('/pustakawan/kembalikan/' . $row->id_pinjam) }}" class="btn btn-lihat bg-main text-white"  data-toggle="modal" data-target="#qrcode" data-keyboard="false" data-backdrop="static">Lihat</button>
+                        @endif
+                    @endif
                     </td>
                 </tr>
             @endforeach
@@ -175,7 +194,7 @@
                 correctLevel : QRCode.CorrectLevel.H
             });
             $('#btn-close').on('click',function(){
-                document.location.href = '/belum_diambil'
+                document.location.href = '/{{ $url }}'
             })
         });
 

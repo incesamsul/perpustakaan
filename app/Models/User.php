@@ -52,4 +52,9 @@ class User extends Authenticatable
             ->where('id_user', $idUser)
             ->first();
     }
+
+    public function member()
+    {
+        return $this->belongsTo(Member::class, 'id', 'id_user');
+    }
 }

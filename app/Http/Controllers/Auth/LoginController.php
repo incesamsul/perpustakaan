@@ -17,13 +17,13 @@ class LoginController extends Controller
 
     public function postLogin(Request $request)
     {
-        $user = User::where('name', $request->username)
+        $user = User::where('email', $request->username)
             ->first();
 
 
         if ($user) {
             if (password_verify($request->password, $user->password)) {
-                if ($user->role == 'Administrator') {
+                if ($user->role == 'Administrator' || $user->role == 'pustakawan') {
                     Auth::login($user);
                     return redirect('/dashboard');
                 } else {
@@ -34,7 +34,7 @@ class LoginController extends Controller
                 return redirect('/login')->with('fail', 'Password yang anda masukan salah');
             }
         } else {
-            return redirect('/login')->with('fail', 'Username yang anda masukan salah');
+            return redirect('/login')->with('fail', 'Email yang anda masukan salah');
         }
         // if (Auth::attempt($request->only('username', 'password'))) {
         //     return redirect('/kasir');

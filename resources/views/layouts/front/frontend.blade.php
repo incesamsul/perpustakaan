@@ -44,7 +44,21 @@
             <span><i class="fas fa-phone"></i> +0397434678</span>
         </div>
         <div class="right text-secondary">
-            <a class="text-inherit mr-3" href="{{ URL::to('/keranjang') }}"><i class="fa-solid fa-cart-shopping"></i><sup class="badge badge-warning ml-2">6</sup></a>
+
+            <a class="text-inherit mr-3" href="{{ URL::to('/keranjang') }}"><i class="fa-solid fa-cart-shopping"></i>
+                <?php
+                if(auth()->user())
+                {
+                    $cart = App\Models\Keranjang::where('id_user', auth()->user()->id)->get();
+                }
+
+                ?>
+                @if (auth()->user())
+                <sup class="badge badge-warning ml-2">{{ count($cart) > 0 ? count($cart) : 0
+                }}</sup>
+                @endif
+
+            </a>
             <a class="text-inherit" href="{{ URL::to('/login') }}"><i class="fas fa-user"></i></a>
         </div>
     </nav>
@@ -103,6 +117,10 @@
   <!-- jQery -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+  {{-- scanner --}}
+<script src="{{ asset('plugins/scanner/html5-qrcode.min.js') }}"></script>
+
   <script src="{{ asset('plugins/qrcodejs/jquery.min.js') }}"></script>
   <script src="{{ asset('plugins/qrcodejs/qrcode.min.js') }}"></script>
 

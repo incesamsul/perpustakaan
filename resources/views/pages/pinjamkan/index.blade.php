@@ -48,7 +48,7 @@
                                     <td>{{ $row->buku->tahun_terbit }}</td>
                                     <td>{{ $row->buku->penerbit }}</td>
                                     <td>
-                                        @if($row->status == 'diambil') 
+                                        @if($row->status == 'diambil')
                                         <span class="badge badge-primary">diambil</span>
                                         @elseif($row->status = 'selesai')
                                         <span class="badge badge-success">selesai</span>
@@ -122,7 +122,9 @@
 
         function onScanSuccess(decodedText, decodedResult) {
     // Handle on success condition with the decoded text or result.
+            // console.log(`Scan result: ${decodedText}`, decodedResult);
             console.log(`Scan result: ${decodedText}`, decodedResult);
+            document.location.href = decodedResult.decodedText;
         }
 
         function onScanError(errorMessage) {

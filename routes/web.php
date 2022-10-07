@@ -7,6 +7,7 @@ use App\Http\Controllers\General;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KeranjangController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\Penilai;
 use App\Http\Controllers\PinjamController;
 use App\Http\Controllers\UserController;
@@ -31,7 +32,6 @@ Route::get('/logout', [LoginController::class, 'logout']);
 Route::get('/', [Home::class, 'beranda']);
 Route::get('/kategori/{id_kategori}', [Home::class, 'beranda']);
 Route::get('/detail_buku/{id_buku}', [Home::class, 'detailBuku']);
-
 
 Route::get('/tentang_aplikasi', [Home::class, 'tentangAplikasi']);
 
@@ -65,14 +65,65 @@ Route::group(['middleware' => ['auth', 'ceklevel:anggota']], function () {
 
 
 // ADMIN ROUTE
-Route::group(['middleware' => ['auth', 'ceklevel:Administrator']], function () {
+Route::group(['middleware' => ['auth', 'ceklevel:Administrator,pustakawan']], function () {
+
+    Route::get('/pengunjung', [Home::class, 'pengunjung']);
+    Route::get('/daftar_pengunjung', [Home::class, 'daftarPengunjung']);
+    Route::get('/pengunjung/{nomor_induk}', [Home::class, 'tambahPengunjung']);
+
     Route::group(['prefix' => 'admin'], function () {
         // GET REQUEST
         Route::get('/pengguna', [Admin::class, 'pengguna']);
         Route::get('/fetch_data', [Admin::class, 'fetchData']);
         Route::get('/kelas', [Admin::class, 'kelas']);
         Route::get('/pinjamkan', [Admin::class, 'pinjamkan']);
+        Route::get('/pinjamkan/{id_pinjam}', [Admin::class, 'pinjamkanBuku']);
         Route::get('/pengembalian', [Admin::class, 'pengembalian']);
+
+        // CRUD KATEGORI
+        Route::get('/anggota', [MemberController::class, 'index']);
+        Route::post('/create_member', [MemberController::class, 'store']);
+        Route::post('/update_member', [MemberController::class, 'update']);
+        Route::post('/delete_member', [MemberController::class, 'delete']);
+
+        // CRUD KATEGORI
+        Route::get('/kategori', [KategoriController::class, 'index']);
+        Route::post('/create_kategori', [KategoriController::class, 'store']);
+        Route::post('/update_kategori', [KategoriController::class, 'update']);
+        Route::post('/delete_kategori', [KategoriController::class, 'delete']);
+
+        // CRUD BUKU
+        Route::get('/buku', [BukuController::class, 'index']);
+        Route::post('/create_buku', [BukuController::class, 'store']);
+        Route::post('/update_buku', [BukuController::class, 'update']);
+        Route::post('/delete_buku', [BukuController::class, 'delete']);
+
+        // CRUD PENGGUNA
+        Route::post('/create_pengguna', [Admin::class, 'createPengguna']);
+        Route::post('/update_pengguna', [Admin::class, 'updatePengguna']);
+        Route::post('/delete_pengguna', [Admin::class, 'deletePengguna']);
+    });
+});
+
+
+
+// ADMIN ROUTE
+Route::group(['middleware' => ['auth', 'ceklevel:Administrator,pustakawan']], function () {
+    Route::group(['prefix' => 'pustakawan'], function () {
+        // GET REQUEST
+        Route::get('/pengguna', [Admin::class, 'pengguna']);
+        Route::get('/fetch_data', [Admin::class, 'fetchData']);
+        Route::get('/kelas', [Admin::class, 'kelas']);
+        Route::get('/pinjamkan', [Admin::class, 'pinjamkan']);
+        Route::get('/pinjamkan/{id_pinjam}', [Admin::class, 'pinjamkanBuku']);
+        Route::get('/kembalikan/{id_pinjam}', [Admin::class, 'kembalikanBuku']);
+        Route::get('/pengembalian', [Admin::class, 'pengembalian']);
+
+        // CRUD KATEGORI
+        Route::get('/anggota', [MemberController::class, 'index']);
+        Route::post('/create_member', [MemberController::class, 'store']);
+        Route::post('/update_member', [MemberController::class, 'update']);
+        Route::post('/delete_member', [MemberController::class, 'delete']);
 
         // CRUD KATEGORI
         Route::get('/kategori', [KategoriController::class, 'index']);
