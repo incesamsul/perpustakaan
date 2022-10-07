@@ -72,6 +72,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator']], function () {
         Route::get('/fetch_data', [Admin::class, 'fetchData']);
         Route::get('/kelas', [Admin::class, 'kelas']);
         Route::get('/pinjamkan', [Admin::class, 'pinjamkan']);
+        Route::get('/pengembalian', [Admin::class, 'pengembalian']);
 
         // CRUD KATEGORI
         Route::get('/kategori', [KategoriController::class, 'index']);

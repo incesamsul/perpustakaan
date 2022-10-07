@@ -108,7 +108,7 @@
 
 <!-- catagory section -->
 
-<section class="catagory_section layout_padding">
+<section class="catagory_section layout_padding" id="kategori">
   <div class="catagory_container">
     <div class="container ">
       <div class="heading_container heading_center">
@@ -122,8 +122,8 @@
       <div class="row mt-3">
         @foreach ($kategori as $row)
         <div class="col-sm-2">
-            <a href="{{ URL::to('/kategori/' . $row->id_kategori) }}" class="text-secondary">
-                <div class="card p-4 d-flex flex-column align-items-center justify-content-center border-0 soft-shadow">
+            <a href="{{ URL::to('/kategori/' . $row->id_kategori . '#kategori') }}" class="text-secondary">
+                <div class="{{$id_kategori == $row->id_kategori ? 'active-card' : ''}} card p-4 d-flex flex-column align-items-center justify-content-center border-0 soft-shadow">
                     <i class="fas fa-book h1"></i>
                     <strong>{{ $row->nama_kategori }}</strong>
                 </div>

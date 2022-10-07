@@ -15,6 +15,7 @@ class Home extends Controller
         } else {
             $data['buku'] = Buku::where('id_kategori', $idKategori)->get();
         }
+        $data['id_kategori'] = $idKategori;
         $data['nama_kategori'] = Kategori::where('id_kategori', $idKategori)->first();
         $data['kategori'] = Kategori::all()->take(5);
         return view('halaman_depan.beranda', $data);

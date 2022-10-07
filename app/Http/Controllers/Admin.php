@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\User;
+use App\Models\Pinjam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -25,13 +26,28 @@ class Admin extends Controller
 
     public function pengguna()
     {
+        $data['headerTitle'] = 'Pengguna';
+        $data['headerSubTitle'] = 'Selamat Datang | Aplikasi perpustakaan';
         $data['pengguna'] = User::all();
         return view('pages.pengguna.index', $data);
     }
 
     public function pinjamkan()
     {
-        return view('pages.pinjamkan.index');
+        $data['headerTitle'] = 'Peminjaman';
+        $data['headerSubTitle'] = 'Selamat Datang | Aplikasi perpustakaan';
+        $data['sidebar'] = 'liPinjamkan';
+        $data['buku'] = Pinjam::where('status','diambil')->get();
+        return view('pages.pinjamkan.index',$data);
+    }
+
+    public function pengembalian()
+    {
+        $data['headerTitle'] = 'Pengembalian';
+        $data['headerSubTitle'] = 'Selamat Datang | Aplikasi perpustakaan';
+        $data['sidebar'] = 'liPengembalian';
+        $data['buku'] = Pinjam::where('status','selesai')->get();
+        return view('pages.pinjamkan.index',$data);
     }
 
     public function profileUser()

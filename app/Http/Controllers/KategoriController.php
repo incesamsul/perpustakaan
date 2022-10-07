@@ -9,6 +9,8 @@ class KategoriController extends Controller
 {
     public function index()
     {
+        $data['headerTitle'] = 'Kategori';
+        $data['headerSubTitle'] = 'Selamat Datang | Aplikasi perpustakaan';
         $data['kategori'] = Kategori::all();
         return view('pages.kategori.index', $data);
     }

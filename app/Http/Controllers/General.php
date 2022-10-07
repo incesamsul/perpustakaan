@@ -20,15 +20,15 @@ class General extends Controller
 
     public function dashboard()
     {
-        $data['headerTitle'] = 'Dashboard Administrator';
-        $data['headerSubTitle'] = 'Selamat Datang, administrator | Aplikasi perpustakaan';
+        $data['headerTitle'] = 'Dashboard';
+        $data['headerSubTitle'] = 'Selamat Datang | Aplikasi perpustakaan';
         return view('pages.dashboard.index', $data);
     }
 
     public function profile()
     {
         $data['headerTitle'] = 'Profile pengguna';
-        $data['headerSubTitle'] = 'Selamat Datang, administrator | Aplikasi perpustakaan';
+        $data['headerSubTitle'] = 'Selamat Datang | Aplikasi perpustakaan';
         $data['user'] = $this->userModel->getUserProfile(auth()->user()->id);
         return view('pages.profile.index', $data);
     }

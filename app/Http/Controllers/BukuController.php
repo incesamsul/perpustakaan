@@ -10,6 +10,8 @@ class BukuController extends Controller
 {
     public function index()
     {
+        $data['headerTitle'] = 'Buku';
+        $data['headerSubTitle'] = 'Selamat Datang | Aplikasi perpustakaan';
         $data['kategori'] = Kategori::all();
         $data['buku'] = Buku::all();
         return view('pages.buku.index', $data);

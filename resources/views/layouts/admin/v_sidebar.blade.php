@@ -85,7 +85,13 @@
                         <li class="nav-item" id="liPinjamkan">
 							<a href="{{ URL::to('/admin/pinjamkan') }}" class="collapsed" >
 								<i class="fas fa-calendar"></i>
-								<p>Pinjamkan</p>
+								<p>Peminjaman</p>
+							</a>
+						</li>
+                        <li class="nav-item" id="liPengembalian">
+							<a href="{{ URL::to('/admin/pengembalian') }}" class="collapsed" >
+								<i class="fas fa-calendar"></i>
+								<p>Pengembalian</p>
 							</a>
 						</li>
 
