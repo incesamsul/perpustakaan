@@ -65,7 +65,11 @@ class Home extends Controller
         } else {
             $data['buku'] = Buku::where('id_buku', $idBuku)->first();
         }
-        $data['pinjaman_user'] = Pinjam::where('id_user', auth()->user()->id)->where('status', '!=', 'selesai')->first();
+        if (auth()->user()) {
+            $data['pinjaman_user'] = Pinjam::where('id_user', auth()->user()->id)->where('status', '!=', 'selesai')->first();
+        } else {
+            $data['pinjaman_user'] = null;
+        }
         return view('halaman_depan.detail_buku', $data);
     }
 }

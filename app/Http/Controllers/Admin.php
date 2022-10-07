@@ -42,6 +42,15 @@ class Admin extends Controller
         $data['buku'] = Pinjam::where('status', 'diambil')->get();
         return view('pages.pinjamkan.index', $data);
     }
+    public function pengembalian()
+    {
+        $data['headerTitle'] = 'Pengembalian';
+        $data['headerSubTitle'] = 'Selamat Datang | Aplikasi perpustakaan';
+        $data['sidebar'] = 'liPengembalian';
+        $data['buku'] = Pinjam::where('status', 'selesai')->get();
+        return view('pages.pinjamkan.index', $data);
+    }
+
 
     public function pinjamkanBuku($idPinjam)
     {
@@ -82,16 +91,6 @@ class Admin extends Controller
 
         return redirect()->back()->with('message', 'buku berhasil kembalikan');
     }
-
-    public function pengembalian()
-    {
-        $data['headerTitle'] = 'Pengembalian';
-        $data['headerSubTitle'] = 'Selamat Datang | Aplikasi perpustakaan';
-        $data['sidebar'] = 'liPengembalian';
-        $data['buku'] = Pinjam::where('status', 'selesai')->get();
-        return view('pages.pinjamkan.index', $data);
-    }
-
     public function profileUser()
     {
         $data['user'] = User::all();

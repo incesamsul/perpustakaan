@@ -157,8 +157,11 @@
                 <h2 id="pencarian-title">Daftar Buku</h2>
                 <input type="text" class="form-control my-custom-form border-0" id="form-pencarian">
             </div>
-            <button class="btn btn-light" id="btn-search">
+            <button class="btn btn-light mx-5" id="btn-search">
                 <i class="fas fa-search"></i>
+            </button>
+            <button class="btn btn-light mx-5" id="btn-close" style="display: none">
+                <i class="fas fa-times"></i>
             </button>
         </div>
 
@@ -282,7 +285,25 @@
 <script>
 
     $('#btn-search').on('click',function(){
+        $('#form-pencarian').css('opacity','1');
+        $('#form-pencarian').css('transform','translateY(-50px)');
 
+        // title
+        $('#pencarian-title').css('opacity','0');
+        $('#pencarian-title').css('transform','translateY(100px)');
+        $(this).css('display','none');
+        $('#btn-close').css('display','block');
+    })
+
+    $('#btn-close').on('click',function(){
+        $('#form-pencarian').css('opacity','0');
+        $('#form-pencarian').css('transform','translateY(-110px)');
+
+        // title
+        $('#pencarian-title').css('opacity','1');
+        $('#pencarian-title').css('transform','translateY(0px)');
+        $(this).css('display','none');
+        $('#btn-search').css('display','block');
     })
 
 </script>

@@ -870,11 +870,13 @@ a:focus {
 }
 
 #form-pencarian {
-    opacity: 0.9;
-    transform: translateY(-100px);
+    opacity: 0;
+    transition: .5s;
+    transform: translateY(-110px);
 }
 
 #pencarian-title {
-    opacity: 0.6;
+    transition: .5s;
+    opacity: 1;
     transform: translateY(0px);
 }
