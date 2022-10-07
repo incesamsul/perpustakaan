@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700&display=swap");
-
 body {
     font-family: 'Mulish', sans-serif;
     color: #0c0c0c;
@@ -868,4 +867,14 @@ a:focus {
 .active-card {
     background-color: #063547;
     color: white;
+}
+
+#form-pencarian {
+    opacity: 0.9;
+    transform: translateY(-100px);
+}
+
+#pencarian-title {
+    opacity: 0.6;
+    transform: translateY(0px);
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Buku;
 use App\Models\User;
 use App\Models\Pinjam;
 use DateTime;
@@ -65,10 +65,21 @@ class Admin extends Controller
         $tanggal = $date->format('Y-m-d');
         $localTime = $date->format('H:i:s');
 
-        Pinjam::where('id_pinjam', $idPinjam)->update([
+        $pinjam = Pinjam::where('id_pinjam', $idPinjam);
+
+        $pinjam->update([
             'status' => 'selesai',
             'tgl_kembali' => $tanggal
         ]);
+
+        $idBuku = $pinjam->first()->buku->id_buku;
+        $buku = Buku::where('id_buku', $idBuku);
+
+        $stokBuku = $buku->first()->stok;
+        $buku->update([
+            'stok' => $stokBuku + $pinjam->first()->jml_buku
+        ]);
+
         return redirect()->back()->with('message', 'buku berhasil kembalikan');
     }
 

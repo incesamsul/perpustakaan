@@ -152,13 +152,14 @@
   <div class="catagory_container">
     <div class="container ">
       <div class="heading_container heading_center">
-        <div class="serach_and_title mb-4 pb-3 d-flex">
-            <h2>
-                Daftar Buku
-              </h2>
-              <button class="btn btn-light" id="btn-search">
-                  <i class="fas fa-search"></i>
-              </button>
+        <div class="serach_and_title mb-4 pb-3 d-flex align-items-start">
+            <div class="search-form-wrapper">
+                <h2 id="pencarian-title">Daftar Buku</h2>
+                <input type="text" class="form-control my-custom-form border-0" id="form-pencarian">
+            </div>
+            <button class="btn btn-light" id="btn-search">
+                <i class="fas fa-search"></i>
+            </button>
         </div>
 
       </div>
@@ -281,7 +282,7 @@
 <script>
 
     $('#btn-search').on('click',function(){
-        alert('hwta')
+
     })
 
 </script>
