@@ -85,6 +85,7 @@ class Admin extends Controller
         $buku = Buku::where('id_buku', $idBuku);
 
         $stokBuku = $buku->first()->stok;
+        dd($pinjam->first()->jml_buku);
         $buku->update([
             'stok' => $stokBuku + $pinjam->first()->jml_buku
         ]);
