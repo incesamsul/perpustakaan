@@ -54,7 +54,7 @@
                             $noHp = $row->user->member->no_hp;
                             $terlambat = $jmlTerlambat < 0 ? '0' : $jmlTerlambat;
                             $denda = $jmlTerlambat < 0 ? '0' : 'Rp. '. number_format($jmlTerlambat * 500);
-                            $message = $row->user->name . 'Anda belum mengembalikan Buku perpustakaan sudah terlambat ' . $terlambat . ' hari dari tanggal ' . $row->tgl_pinjam . '  denda sebanyak  Rp '. $denda .' * dari Admin Perpustakaan*';
+                            $message = $row->user->name . ' Anda belum mengembalikan Buku perpustakaan sudah terlambat ' . $terlambat . ' hari dari tanggal ' . $row->tgl_pinjam . '  denda sebanyak  Rp '. $denda .' * dari Admin Perpustakaan*';
                         ?>
                         <a href="https://web.whatsapp.com/send?phone={{ $noHp }}&text={{ $message }}" target="_blank" class="btn btn-success"><i class="fab fa-whatsapp"></i></button>
                     </td>
