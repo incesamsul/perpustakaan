@@ -43,7 +43,7 @@
                                             </div>
 											<div class="u-text">
 												<h4>{{ auth()->user()->name }}</h4>
-												<p class="text-muted">{{ auth()->user()->email }}</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+												<p class="text-muted">{{ auth()->user()->email }}</p><a href="{{ URL::to('/profile') }}" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
 											</div>
 										</div>
 									</li>
