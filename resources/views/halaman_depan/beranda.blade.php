@@ -172,7 +172,7 @@
         <div class="col-sm-3">
             <a href="{{ URL::to('/detail_buku/' . $row->id_buku) }}" class="text-secondary">
                 <div class="card books-card d-flex flex-column  border-0 soft-shadow">
-                    <img src="{{ asset('data/gambar_buku/' . $row->gambar) }}" alt="buku">
+                    <img class="card-image" src="{{ asset('data/gambar_buku/' . $row->gambar) }}" alt="buku">
                     <div class="books-capt p-4 d-flex flex-column">
                         <strong>{{ $row->judul }}</strong>
                         <span>Penerbit : {{ $row->penerbit }}</span>

@@ -860,6 +860,11 @@ a:focus {
     overflow: hidden;
 }
 
+.card-image{
+    max-height: 270px;
+    object-fit: fit;
+}
+
 .books-card img {
     width: 100%;
 }

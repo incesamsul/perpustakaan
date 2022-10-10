@@ -57,9 +57,9 @@
                         <span class="badge badge-secondary">none</span>
                         @else
                         @if ($title == 'Belum diambil')
-                        <button data-qrcode="{{ URL::to('/pustakawan/pinjamkan/' . $row->id_pinjam) }}" class="btn btn-lihat bg-main text-white"  data-toggle="modal" data-target="#qrcode" data-keyboard="false" data-backdrop="static">Lihat</button>
+                        <button data-qrcode="{{ URL::to('/pustakawan/pinjamkan/' . $row->id_user) }}" class="btn btn-lihat bg-main text-white"  data-toggle="modal" data-target="#qrcode" data-keyboard="false" data-backdrop="static">Lihat</button>
                         @else
-                        <button data-qrcode="{{ URL::to('/pustakawan/kembalikan/' . $row->id_pinjam) }}" class="btn btn-lihat bg-main text-white"  data-toggle="modal" data-target="#qrcode" data-keyboard="false" data-backdrop="static">Lihat</button>
+                        <button data-qrcode="{{ URL::to('/pustakawan/kembalikan/' . $row->id_user) }}" class="btn btn-lihat bg-main text-white"  data-toggle="modal" data-target="#qrcode" data-keyboard="false" data-backdrop="static">Lihat</button>
                         @endif
                     @endif
                     </td>

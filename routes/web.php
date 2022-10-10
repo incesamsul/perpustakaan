@@ -77,7 +77,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator,pustakawan']], fu
         Route::get('/fetch_data', [Admin::class, 'fetchData']);
         Route::get('/kelas', [Admin::class, 'kelas']);
         Route::get('/pinjamkan', [Admin::class, 'pinjamkan']);
-        Route::get('/pinjamkan/{id_pinjam}', [Admin::class, 'pinjamkanBuku']);
+        Route::get('/pinjamkan/{id_user}', [Admin::class, 'pinjamkanBuku']);
+        Route::get('/kembalikan/{id_user}', [Admin::class, 'kembalikanBuku']);
         Route::get('/pengembalian', [Admin::class, 'pengembalian']);
 
         // CRUD KATEGORI
@@ -115,8 +116,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator,pustakawan']], fu
         Route::get('/fetch_data', [Admin::class, 'fetchData']);
         Route::get('/kelas', [Admin::class, 'kelas']);
         Route::get('/pinjamkan', [Admin::class, 'pinjamkan']);
-        Route::get('/pinjamkan/{id_pinjam}', [Admin::class, 'pinjamkanBuku']);
-        Route::get('/kembalikan/{id_pinjam}', [Admin::class, 'kembalikanBuku']);
+        Route::get('/pinjamkan/{id_user}', [Admin::class, 'pinjamkanBuku']);
+        Route::get('/kembalikan/{id_user}', [Admin::class, 'kembalikanBuku']);
         Route::get('/pengembalian', [Admin::class, 'pengembalian']);
 
         // CRUD KATEGORI

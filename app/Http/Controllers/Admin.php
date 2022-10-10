@@ -52,14 +52,14 @@ class Admin extends Controller
     }
 
 
-    public function pinjamkanBuku($idPinjam)
+    public function pinjamkanBuku($idUser)
     {
         $timezone = 'Asia/Makassar';
         $date = new DateTime('now', new DateTimeZone($timezone));
         $tanggal = $date->format('Y-m-d');
         $localTime = $date->format('H:i:s');
 
-        Pinjam::where('id_pinjam', $idPinjam)->update([
+        Pinjam::where('id_user', $idUser)->where('status', 'blm_diambil')->update([
             'status' => 'diambil',
             'tgl_pinjam' => $tanggal
         ]);
@@ -67,30 +67,32 @@ class Admin extends Controller
         return redirect()->back()->with('message', 'buku berhasil dipinjamkan');
     }
 
-    public function kembalikanBuku($idPinjam)
+    public function kembalikanBuku($idUser)
     {
         $timezone = 'Asia/Makassar';
         $date = new DateTime('now', new DateTimeZone($timezone));
         $tanggal = $date->format('Y-m-d');
         $localTime = $date->format('H:i:s');
 
-        $pinjam = Pinjam::where('id_pinjam', $idPinjam);
+        $pinjam = Pinjam::where('id_user', $idUser)->where('status', 'diambil');
+
+
+        foreach ($pinjam->get() as $row) {
+            $buku = Buku::where('id_buku', $row->buku->id_buku);
+            $stokBuku = $buku->first()->stok;
+            $stokSemula = $stokBuku + $row->jml_buku;
+            
+            $buku->update([
+                'stok' => $stokSemula
+            ]);
+        }        
+
 
         $pinjam->update([
             'status' => 'selesai',
             'tgl_kembali' => $tanggal
         ]);
-
-        $idBuku = $pinjam->first()->buku->id_buku;
-        $buku = Buku::where('id_buku', $idBuku);
-
-        $stokBuku = $buku->first()->stok;
-        dd($pinjam->first()->jml_buku);
-        $buku->update([
-            'stok' => $stokBuku + $pinjam->first()->jml_buku
-        ]);
-
-        return redirect()->back()->with('message', 'buku berhasil kembalikan');
+        return redirect()->back()->with('message', 'buku berhasil kembalian');
     }
     public function profileUser()
     {

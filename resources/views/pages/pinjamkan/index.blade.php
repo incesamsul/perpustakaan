@@ -124,7 +124,13 @@
     // Handle on success condition with the decoded text or result.
             // console.log(`Scan result: ${decodedText}`, decodedResult);
             console.log(`Scan result: ${decodedText}`, decodedResult);
-            document.location.href = decodedResult.decodedText;
+
+            if(decodedResult.decodedText != ''){
+                alert('scan berhasil tunggu sebentar');
+                setTimeout(() => {
+                    document.location.href = decodedResult.decodedText;
+                }, 1500);
+            }
         }
 
         function onScanError(errorMessage) {
