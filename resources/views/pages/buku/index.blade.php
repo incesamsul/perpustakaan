@@ -33,7 +33,7 @@
                                         <button class="btn-unlihat btn btn-danger" style="display: none"><i class="fas fa-times"></i></button>
                                         <button class="btn-lihat btn btn-primary"><i class="fas fa-eye"></i></button>
                                         <div class="stok-wrapper" style="display: none">
-                                            @for ($i = $row->last_code; $i<= $row->stok + ($row->last_code /2); $i++)
+                                            @for ($i = $row->last_code; $i<= $row->stok + ($row->last_code - 1); $i++)
                                             {{ substr($row->judul,0,3) }}-00{{ $i }} <br>
                                             @endfor
                                         </div>
