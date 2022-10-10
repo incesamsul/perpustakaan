@@ -82,7 +82,7 @@
                                 <img src="{{ auth()->user()->foto == "" ? asset('stisla/assets/img/avatar/avatar-1.png') : asset('data/foto_profile/'.auth()->user()->foto) }}" alt="..." class="avatar-img rounded-circle profile-pict">
                                 <div class="media-title"></div>
                                 <div class="font-weight-600 text-muted text-small"></div>
-                                <div class="font-weight-600 text-muted text-small my-3">{{ $user->name }}</div>
+                                <div class="font-weight-600 text-muted text-small my-3"></div>
                             </div>
                         </li>
                         <li class="media">
@@ -91,28 +91,28 @@
                                 <table class="table table-striped">
                                     <tr>
                                         <td class="bg-soft-primary">Nama</td>
-                                        <td>{{ $user->name }}</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td class="bg-soft-primary">Jensi Kelamin</td>
-                                        <td>{{ $user->jenis_kelamin }}</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td class="bg-soft-primary">Tempat Dan Tanggal Lahir</td>
-                                        <td>{{ $user->tempat_lahir . "  " . $user->tanggal_lahir }}</td>
+                                        <td>"  "</td>
                                     </tr>
                                     <tr>
                                         <td class="bg-soft-primary">Alamat</td>
-                                        <td>{{ $user->alamat }}</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td class="bg-soft-primary">Telepon</td>
-                                        <td>{{ $user->no_telp }}</td>
+                                        <td></td>
                                     </tr>
                                 </table>
-                                <div class="alert alert-info">silahkan hubungi admin jika terdapat kesalahan data</div>
+                                {{-- <div class="alert alert-info">silahkan hubungi admin jika terdapat kesalahan data</div> --}}
                                 @else
-                                <div class="alert alert-warning">Belum ada data user, untuk lebih lanjut hubungi admin</div>
+                                {{-- <div class="alert alert-warning">Belum ada data user, untuk lebih lanjut hubungi admin</div> --}}
                                 @endif
                             </div>
                         </li>

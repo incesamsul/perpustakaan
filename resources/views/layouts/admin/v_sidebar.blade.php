@@ -18,7 +18,7 @@
 							<div class="clearfix"></div>
 
 							<div class="collapse in" id="collapseExample">
-								<ul class="nav">
+								{{-- <ul class="nav">
 									<li>
 										<a href="#profile">
 											<span class="link-collapse">My Profile</span>
@@ -34,7 +34,7 @@
 											<span class="link-collapse">Settings</span>
 										</a>
 									</li>
-								</ul>
+								</ul> --}}
 							</div>
 						</div>
 					</div>
@@ -153,7 +153,7 @@
 								<p>Daftar Pengunjung</p>
 							</a>
 						</li>
-						
+
                         @endif
 						<li class="mx-4 mt-2">
 							<a href="{{ URL::to("logout") }}" class="btn bg-main text-white btn-block"><span class="btn-label mr-2"> <i class="fa fa-sign-out-alt"></i> </span>Logout</a>
