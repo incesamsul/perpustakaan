@@ -70,12 +70,6 @@
 								<p>Pengguna</p>
 							</a>
 						</li>
-                        <li class="nav-item" id="liAnggota">
-							<a href="{{ URL::to('/admin/anggota') }}" class="collapsed" >
-								<i class="fas fa-user"></i>
-								<p>Anggota</p>
-							</a>
-						</li>
                         <li class="nav-item" id="liKategori">
 							<a href="{{ URL::to('/admin/kategori') }}" class="collapsed" >
 								<i class="fas fa-swatchbook"></i>
@@ -132,9 +126,21 @@
 								<p>Pengembalian</p>
 							</a>
 						</li>
+                        <li class="nav-item" id="liDenda">
+							<a href="{{ URL::to('/admin/denda') }}" class="collapsed" >
+								<i class="fas fa-list"></i>
+								<p>Denda</p>
+							</a>
+						</li>
                         @endif
 
                         @if (auth()->user()->role == 'Administrator' || auth()->user()->role == 'pustakawan')
+						<li class="nav-item" id="liAnggota">
+							<a href="{{ URL::to('/admin/anggota') }}" class="collapsed" >
+								<i class="fas fa-user"></i>
+								<p>Anggota</p>
+							</a>
+						</li>
                         <li class="nav-item" id="liPengunjung">
 							<a href="{{ URL::to('/pengunjung') }}" class="collapsed" >
 								<i class="fas fa-qrcode"></i>
@@ -147,6 +153,7 @@
 								<p>Daftar Pengunjung</p>
 							</a>
 						</li>
+						
                         @endif
 						<li class="mx-4 mt-2">
 							<a href="{{ URL::to("logout") }}" class="btn bg-main text-white btn-block"><span class="btn-label mr-2"> <i class="fa fa-sign-out-alt"></i> </span>Logout</a>

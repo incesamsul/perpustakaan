@@ -17,6 +17,7 @@
                         <thead>
                             <tr>
                                 <th width="5%" class="sorting" data-sorting_type="asc" data-column_name="id" style="cursor: pointer">ID <span id="id_icon"></span></th>
+                                <td>Kode buku</td>
                                 <td>Judul</td>
                                 <td>Pengarang</td>
                                 <td>Tahun Terbit</td>
@@ -28,6 +29,7 @@
                             @foreach ($buku as $row)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $row->kode_buku }}</td>
                                     <td>{{ $row->judul }}</td>
                                     <td>{{ $row->pengarang }}</td>
                                     <td>{{ $row->tahun_terbit }}</td>
@@ -76,6 +78,19 @@
                         <input required type="text" class="form-control" name="judul" id="judul">
                     </div>
                     <div class="form-group">
+                        <label for="kategori">kategori</label>
+                        <select name="kategori" id="kategori" class="form-control" required>
+                            <option value="">-- kategori --</option>
+                            @foreach ($kategori as $row)
+                                <option value="{{ $row->id_kategori }}">{{ $row->nama_kategori }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="kode_buku">Kode buku</label>
+                        <input readonly value="" required type="text" class="form-control" name="kode_buku" id="kode_buku">
+                    </div>
+                    <div class="form-group">
                         <label for="pengarang">Pengarang</label>
                         <input required type="text" class="form-control" name="pengarang" id="pengarang">
                     </div>
@@ -106,15 +121,6 @@
                             <option>pembelian</option>
                             <option>sumbangan</option>
                             <option>denda</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="kategori">kategori</label>
-                        <select name="kategori" id="kategori" class="form-control" required>
-                            <option value="">-- kategori --</option>
-                            @foreach ($kategori as $row)
-                                <option value="{{ $row->id_kategori }}">{{ $row->nama_kategori }}</option>
-                            @endforeach
                         </select>
                     </div>
                     <div class="form-group">
@@ -158,6 +164,14 @@
     $(document).ready(function() {
 
 
+        $(document).on('change','#kategori', function(){
+            let text = $('#kategori option:selected').text();
+            let kode = text.substr(0,3);
+            let randomNumber = Math.floor(1000 + Math.random() * 9000);
+            $('#kode_buku').val(kode + "-" + randomNumber)
+            
+        })
+
         // TOMBOL DETAIL
         $('.table-buku tbody').on('click', 'tr td a.detail', function() {
             let detail = $(this).data('detail');
@@ -183,6 +197,7 @@
             let edit = $(this).data('edit');
             $('#id').val(edit.id_buku);
             $('#judul').val(edit.judul);
+            $('#kode_buku').val(edit.kode_buku);
             $('#pengarang').val(edit.pengarang);
             $('#tahun_terbit').val(edit.tahun_terbit);
             $('#penerbit').val(edit.penerbit);

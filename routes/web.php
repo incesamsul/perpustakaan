@@ -80,6 +80,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator,pustakawan']], fu
         Route::get('/pinjamkan/{id_user}', [Admin::class, 'pinjamkanBuku']);
         Route::get('/kembalikan/{id_user}', [Admin::class, 'kembalikanBuku']);
         Route::get('/pengembalian', [Admin::class, 'pengembalian']);
+        Route::get('/denda', [Admin::class, 'denda']);
 
         // CRUD KATEGORI
         Route::get('/anggota', [MemberController::class, 'index']);

@@ -42,6 +42,19 @@ class Admin extends Controller
         $data['buku'] = Pinjam::where('status', 'diambil')->get();
         return view('pages.pinjamkan.index', $data);
     }
+
+    public function denda()
+    {
+        $data['headerTitle'] = 'Denda';
+        $data['headerSubTitle'] = 'Selamat Datang | Aplikasi perpustakaan';
+        $data['title'] = 'Belum diambil';
+        $data['url'] = 'belum_diambil';
+        $timezone = 'Asia/Makassar';
+        $date = new DateTime('now', new DateTimeZone($timezone));
+        $data['tanggal_hari_ini'] = $date->format('Y-m-d');
+        $data['buku'] = Pinjam::where('status','selesai')->get();
+        return view('pages.denda.index', $data);
+    }
     public function pengembalian()
     {
         $data['headerTitle'] = 'Pengembalian';

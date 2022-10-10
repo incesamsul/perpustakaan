@@ -16,6 +16,7 @@ class CreateBukuTable extends Migration
         Schema::create('buku', function (Blueprint $table) {
             $table->increments('id_buku');
             $table->unsignedInteger('id_kategori');
+            $table->string('kode_buku');
             $table->string('judul');
             $table->string('pengarang');
             $table->year('tahun_terbit');

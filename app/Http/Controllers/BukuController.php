@@ -24,6 +24,7 @@ class BukuController extends Controller
         $gambar->move(public_path('data/gambar_buku/'), $namaFile);
         Buku::create([
             'judul' => $request->judul,
+            'kode_buku' => $request->kode_buku,
             'pengarang' => $request->pengarang,
             'tahun_terbit' => $request->tahun_terbit,
             'penerbit' => $request->penerbit,
@@ -49,6 +50,7 @@ class BukuController extends Controller
                 ['id_buku', '=', $request->id]
             ])->update([
                 'judul' => $request->judul,
+                'kode_buku' => $request->kode_buku,
                 'pengarang' => $request->pengarang,
                 'tahun_terbit' => $request->tahun_terbit,
                 'penerbit' => $request->penerbit,
@@ -65,6 +67,7 @@ class BukuController extends Controller
                 ['id_buku', '=', $request->id]
             ])->update([
                 'judul' => $request->judul,
+                'kode_buku' => $request->kode_buku,
                 'pengarang' => $request->pengarang,
                 'tahun_terbit' => $request->tahun_terbit,
                 'penerbit' => $request->penerbit,
