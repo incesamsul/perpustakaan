@@ -25,6 +25,7 @@
                 <td>Buku</td>
                 <td>jml hari</td>
                 <td>jml Buku</td>
+                <td>Kode buku</td>
                 @if ($title != 'Belum diambil')
                 <td>Tgl pinjam</td>
                 <td>Tgl kembali</td>
@@ -43,6 +44,11 @@
                     </td>
                     <td class="align-middle">{{ $row->jml_hari }}</td>
                     <td class="align-middle">{{ $row->jml_buku }}</td>
+                    <td class="align-middle">
+                        @for ($i = $row->last_code; $i<= $row->jml_buku; $i++)
+                        {{ substr($row->buku->judul,0,3) }}-00{{ $i }} <br>
+                        @endfor
+                    </td>
                     @if ($title != 'Belum diambil')
                         <td class="align-middle">{{ $row->tgl_pinjam == '' ? 'none' : $row->tgl_pinjam  }}</td>
                         <td class="align-middle">{{ $row->tgl_kembali == '' ? 'none' : $row->tgl_kembali  }}</td>

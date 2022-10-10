@@ -22,6 +22,7 @@ class CreatePinjamTable extends Migration
             $table->enum('status', ['blm_diambil', 'diambil', 'selesai'])->default('blm_diambil');
             $table->date('tgl_pinjam')->nullable();
             $table->date('tgl_kembali')->nullable();
+            $table->string('last_code');
             $table->timestamps();
             $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('id_buku')->references('id_buku')->on('buku')->onUpdate('cascade')->onDelete('cascade');

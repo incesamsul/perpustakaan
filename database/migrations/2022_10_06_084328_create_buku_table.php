@@ -25,6 +25,7 @@ class CreateBukuTable extends Migration
             $table->integer('stok');
             $table->string('lokasi');
             $table->string('sinopsis');
+            $table->string('last_code');
             $table->enum('asal', ['pembelian', 'sumbangan', 'denda']);
             $table->string('gambar');
             $table->timestamps();

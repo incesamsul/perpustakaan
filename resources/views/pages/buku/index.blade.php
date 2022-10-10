@@ -29,7 +29,15 @@
                             @foreach ($buku as $row)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $row->kode_buku }}</td>
+                                    <td>
+                                        <button class="btn-unlihat btn btn-danger" style="display: none"><i class="fas fa-times"></i></button>
+                                        <button class="btn-lihat btn btn-primary"><i class="fas fa-eye"></i></button>
+                                        <div class="stok-wrapper" style="display: none">
+                                            @for ($i = $row->last_code; $i<= $row->stok; $i++)
+                                            {{ substr($row->judul,0,3) }}-00{{ $i }} <br>
+                                            @endfor
+                                        </div>
+                                    </td>
                                     <td>{{ $row->judul }}</td>
                                     <td>{{ $row->pengarang }}</td>
                                     <td>{{ $row->tahun_terbit }}</td>
@@ -164,12 +172,24 @@
     $(document).ready(function() {
 
 
+        $('.btn-lihat').on('click',function(){
+            $(this).next().css('display','block');
+            $(this).css('display','none');
+            $(this).prev().css('display','block');
+        })
+
+        $('.btn-unlihat').on('click',function(){
+            $(this).next().next().css('display','none');
+            $(this).css('display','none');
+            $(this).next().css('display','block');
+        })
+
         $(document).on('change','#kategori', function(){
             let text = $('#kategori option:selected').text();
             let kode = text.substr(0,3);
             let randomNumber = Math.floor(1000 + Math.random() * 9000);
             $('#kode_buku').val(kode + "-" + randomNumber)
-            
+
         })
 
         // TOMBOL DETAIL

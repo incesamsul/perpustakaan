@@ -52,7 +52,7 @@ class Admin extends Controller
         $timezone = 'Asia/Makassar';
         $date = new DateTime('now', new DateTimeZone($timezone));
         $data['tanggal_hari_ini'] = $date->format('Y-m-d');
-        $data['buku'] = Pinjam::where('status','selesai')->get();
+        $data['buku'] = Pinjam::where('status', 'selesai')->get();
         return view('pages.denda.index', $data);
     }
     public function pengembalian()
@@ -94,11 +94,12 @@ class Admin extends Controller
             $buku = Buku::where('id_buku', $row->buku->id_buku);
             $stokBuku = $buku->first()->stok;
             $stokSemula = $stokBuku + $row->jml_buku;
-            
+
             $buku->update([
-                'stok' => $stokSemula
+                'stok' => $stokSemula,
+                'last_code' => $buku->first()->last_code - $row->jml_buku
             ]);
-        }        
+        }
 
 
         $pinjam->update([

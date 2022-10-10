@@ -34,6 +34,7 @@ class BukuController extends Controller
             'asal' => $request->asal,
             'sinopsis' => $request->sinopsis,
             'id_kategori' => $request->kategori,
+            'last_code' => '1',
             'gambar' => $namaFile,
         ]);
         return redirect()->back()->with('message', 'data Berhasil di tambahkan');

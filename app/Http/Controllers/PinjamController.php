@@ -21,11 +21,18 @@ class PinjamController extends Controller
         $dataCheckout = json_decode($request->checkout);
 
         foreach ($dataCheckout as $row) {
+            $buku =  Buku::where('id_buku', $row->id_buku);
+            $lastCode = $buku->first()->last_code;
             Pinjam::create([
                 'id_user' => auth()->user()->id,
                 'id_buku' => $row->id_buku,
                 'jml_hari' => $row->jml_hari,
                 'jml_buku' => $row->jml_buku,
+                'last_code' => $lastCode,
+            ]);
+
+            $lastCode = $buku->update([
+                'last_code' => (int)$lastCode + $row->jml_buku
             ]);
         }
 
