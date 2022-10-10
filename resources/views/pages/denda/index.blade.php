@@ -28,7 +28,7 @@
                 <td>Tgl kembali</td>
                 <td>Terlambat</td>
                 <td>Denda</td>
-                
+
                 <td>Aksi</td>
             </tr>
             @foreach ($buku as $row)
@@ -50,9 +50,11 @@
                     <td class="align-middle">{{ $jmlTerlambat < 0 ? '0' : $jmlTerlambat }} Hari</td>
                     <td class="align-middle">{{ $jmlTerlambat < 0 ? '0' : 'Rp. '. number_format($jmlTerlambat * 500) }} </td>
                     <td>
-                        <?php 
+                        <?php
                             $noHp = $row->user->member->no_hp;
-                            $message = $row->user->name . 'Bukunya di kembalikan dong kalo pinjam';
+                            $terlambat = $jmlTerlambat < 0 ? '0' : $jmlTerlambat;
+                            $denda = $jmlTerlambat < 0 ? '0' : 'Rp. '. number_format($jmlTerlambat * 500);
+                            $message = $row->user->name . 'Anda belum mengembalikan Buku perpustakaan sudah terlambat ' . $terlambat . ' hari dari tanggal ' . $row->tgl_pinjam . '  denda sebanyak  Rp '. $denda .' * dari Admin Perpustakaan*';
                         ?>
                         <a href="https://web.whatsapp.com/send?phone={{ $noHp }}&text={{ $message }}" target="_blank" class="btn btn-success"><i class="fab fa-whatsapp"></i></button>
                     </td>

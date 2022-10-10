@@ -32,6 +32,7 @@
                             <tr>
                                 <th width="5%" class="sorting" data-sorting_type="asc" data-column_name="id" style="cursor: pointer">ID <span id="id_icon"></span></th>
                                 <td>Judul</td>
+                                <td>Nama</td>
                                 <td>Pengarang</td>
                                 <td>Tahun Terbit</td>
                                 <td>Penerbit</td>
@@ -44,6 +45,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $row->buku->judul }}</td>
+                                    <td>{{ $row->user->name }}</td>
                                     <td>{{ $row->buku->pengarang }}</td>
                                     <td>{{ $row->buku->tahun_terbit }}</td>
                                     <td>{{ $row->buku->penerbit }}</td>
