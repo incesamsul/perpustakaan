@@ -47,7 +47,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $row->buku->judul }}</td>
                                     <td>{{ $row->user->name  }}</td>
-                                    <td>{{ $row->user->member->nisn }}</td>
+                                    <td>{{ $row->user->member->nomor_induk }}</td>
                                     <td>{{ $row->buku->pengarang }}</td>
                                     <td>{{ $row->buku->tahun_terbit }}</td>
                                     <td>{{ $row->buku->penerbit }}</td>
