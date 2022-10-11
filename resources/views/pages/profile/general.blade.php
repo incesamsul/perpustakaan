@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-12">
         <div class="card ">
             <div class="card-header">
                 <h4>Profile Pengguna</h4>
@@ -68,68 +68,5 @@
         </div>
     </div>
 
-    <div class="col-lg-8">
-
-        <div class="card">
-            <div class="card-header">
-                <h4>Detail Profile</h4>
-            </div>
-            <div class="card-body">
-                <div class="container">
-                    <ul class="list-unstyled list-unstyled-border">
-                        <li class="media">
-                            <div class="media-body text-center">
-                                <img src="{{ auth()->user()->foto == "" ? asset('stisla/assets/img/avatar/avatar-1.png') : asset('data/foto_profile/'.auth()->user()->foto) }}" alt="..." class="avatar-img rounded-circle profile-pict">
-                                <div class="media-title"></div>
-                                <div class="font-weight-600 text-muted text-small"></div>
-                                <div class="font-weight-600 text-muted text-small my-3"></div>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="media-body">
-                                @if ($user)
-                                <table class="table table-striped">
-                                    <tr>
-                                        <td class="bg-soft-primary">Nama</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bg-soft-primary">Jensi Kelamin</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bg-soft-primary">Tempat Dan Tanggal Lahir</td>
-                                        <td>"  "</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bg-soft-primary">Alamat</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bg-soft-primary">Telepon</td>
-                                        <td></td>
-                                    </tr>
-                                </table>
-                                {{-- <div class="alert alert-info">silahkan hubungi admin jika terdapat kesalahan data</div> --}}
-                                @else
-                                {{-- <div class="alert alert-warning">Belum ada data user, untuk lebih lanjut hubungi admin</div> --}}
-                                @endif
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="media-body">
-                                <a href="" class="btn bg-main text-white btn-lg btn-block btn-icon-split" data-toggle="modal" data-target="#modal">
-                                    <i class="fas fa-camera"></i> Ganti Foto Profile
-                                </a>
-                                {{-- <a href="" class="btn bg-main text-white btn-lg btn-block btn-icon-split">
-                                    <i class="fas fa-pen"></i> Edit Biodata
-                                </a>  --}}
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </div>
