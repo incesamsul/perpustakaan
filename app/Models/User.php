@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Member::class, 'id', 'id_user');
     }
+
+    public function pinjam()
+    {
+        return $this->belongsTo(Pinjam::class, 'id', 'id_user');
+    }
 }
