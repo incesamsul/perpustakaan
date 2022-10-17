@@ -39,6 +39,7 @@
                                 <td>Tahun Terbit</td>
                                 <td>Penerbit</td>
                                 <td>Status</td>
+                                <td>aksi</td>
                                 <td></td>
                             </tr>
                         </thead>
@@ -67,6 +68,15 @@
                                         @elseif($row->status = 'selesai')
                                         <span class="badge badge-success">selesai</span>
                                         @endif
+                                    </td>
+                                    <td>
+                                        <?php
+                                            $noHp = $row->user->member->no_hp;
+                                            $terlambat = $jmlTerlambat < 0 ? '0' : $jmlTerlambat;
+                                            $denda = $jmlTerlambat < 0 ? '0' : 'Rp. '. number_format($jmlTerlambat * 500);
+                                            $message = $row->user->name . ' Anda belum mengembalikan Buku perpustakaan sudah terlambat ' . $terlambat . ' hari dari tanggal ' . $row->tgl_pinjam . '  denda sebanyak  Rp '. $denda .' * dari Admin Perpustakaan*';
+                                        ?>
+                                        <a href="https://web.whatsapp.com/send?phone={{ $noHp }}&text={{ $message }}" target="_blank" class="btn btn-success"><i class="fab fa-whatsapp"></i></button>
                                     </td>
                                     <td class="option">
                                         <div class="btn-group dropleft btn-option">
