@@ -16,7 +16,7 @@
 
       </div> --}}
       <div class="row mt-5">
-        <div class="col-sm-9">
+        <div class="col-sm-9 table-responsive">
             <h4>{{ $title }}</h4>
             @if (count($buku) > 0)
         <table class="table table-striped">
@@ -63,9 +63,9 @@
                         <span class="badge badge-secondary">none</span>
                         @else
                         @if ($title == 'Belum diambil')
-                        <button data-qrcode="{{ URL::to('/pustakawan/pinjamkan/' . $row->id_user) }}" class="btn btn-lihat bg-main text-white"  data-toggle="modal" data-target="#qrcode" data-keyboard="false" data-backdrop="static">Lihat</button>
+                        <button data-qrcode="http://127.0.0.1:8000/pustakawan/pinjamkan/{{ $row->id_user }}" class="btn btn-lihat bg-main text-white"  data-toggle="modal" data-target="#qrcode" data-keyboard="false" data-backdrop="static">Lihat</button>
                         @else
-                        <button data-qrcode="{{ URL::to('/pustakawan/kembalikan/' . $row->id_user) }}" class="btn btn-lihat bg-main text-white"  data-toggle="modal" data-target="#qrcode" data-keyboard="false" data-backdrop="static">Lihat</button>
+                        <button data-qrcode="http://127.0.0.1:8000/pustakawan/kembalikan/{{ $row->id_user }}" class="btn btn-lihat bg-main text-white"  data-toggle="modal" data-target="#qrcode" data-keyboard="false" data-backdrop="static">Lihat</button>
                         @endif
                     @endif
                     </td>

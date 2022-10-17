@@ -89,7 +89,7 @@ class Admin extends Controller
 
         $pinjam = Pinjam::where('id_user', $idUser)->where('status', 'diambil');
 
-
+        
         foreach ($pinjam->get() as $row) {
             $buku = Buku::where('id_buku', $row->buku->id_buku);
             $stokBuku = $buku->first()->stok;

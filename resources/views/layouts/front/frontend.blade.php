@@ -89,6 +89,12 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ URL::to('/#tentang_kami') }}">Tentang kami</a>
               </li>
+              <li class="nav-item only-mobile">
+                <a class="nav-link" href="{{ URL::to('/login') }}">Akun saya</a>
+              </li>
+              <li class="nav-item only-mobile">
+                <a class="nav-link" href="{{ URL::to('/keranjang') }}">Keranjang</a>
+              </li>
             </ul>
             {{-- <from class="search_form">
               <input type="text" class="form-control" placeholder="Search here...">

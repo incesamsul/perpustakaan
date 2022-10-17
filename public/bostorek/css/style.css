@@ -885,3 +885,11 @@ a:focus {
     opacity: 1;
     transform: translateY(0px);
 }
+
+@media only screen and (min-width: 600px) {
+    .only-mobile{
+        display: none;
+    }
+}
+
+
