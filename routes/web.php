@@ -34,6 +34,7 @@ Route::get('/kategori/{id_kategori}', [Home::class, 'beranda']);
 Route::get('/detail_buku/{id_buku}', [Home::class, 'detailBuku']);
 
 Route::get('/tentang_aplikasi', [Home::class, 'tentangAplikasi']);
+Route::get('/cari_buku', [Home::class, 'cariBuku']);
 
 
 Route::group(['middleware' => ['guest']], function () {

@@ -9,6 +9,7 @@ use App\Models\Pengunjung;
 use App\Models\Pinjam;
 use DateTime;
 use DateTimeZone;
+use Illuminate\Http\Request;
 
 class Home extends Controller
 {
@@ -71,5 +72,10 @@ class Home extends Controller
             $data['pinjaman_user'] = null;
         }
         return view('halaman_depan.detail_buku', $data);
+    }
+
+    public function cariBuku(Request $request)
+    {
+        return Buku::where('judul', 'LIKE', '%' . $request->keyword . '%')->orWhere('penerbit', 'LIKE', '%' . $request->keyword . '%')->get();
     }
 }

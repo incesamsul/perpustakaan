@@ -155,7 +155,7 @@
         <div class="serach_and_title mb-4 pb-3 d-flex align-items-start">
             <div class="search-form-wrapper">
                 <h2 id="pencarian-title">Daftar Buku</h2>
-                <input type="text" class="form-control my-custom-form border-0" id="form-pencarian">
+                <input data-path="{{ asset('data/gambar_buku/') }}" type="text" class="form-control my-custom-form border-0" id="form-pencarian">
             </div>
             <button class="btn btn-light mx-5" id="btn-search">
                 <i class="fas fa-search"></i>
@@ -166,7 +166,10 @@
         </div>
 
       </div>
-      <div class="row">
+      <div id="loading" class="d-flex align-items-center justify-content-center">
+            <img src="{{ asset('img/svg_animated/loading.svg') }}" alt="" style="display: none">
+        </div>
+      <div class="row" id="buku-wrapper">
         @if (count($buku) > 0)
         @foreach ($buku as $row)
         <div class="col-sm-3">
@@ -283,6 +286,52 @@
 @endsection
 @section('script')
 <script>
+
+    $('#form-pencarian').on('keyup', function(){
+        let keyword = $(this).val();
+        let path = $(this).data('path');
+        console.log(path);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+            , url: '/cari_buku'
+            , method: 'post'
+            , dataType: 'json'
+            , data: {
+                keyword : keyword
+            }
+            , success: function(data) {
+                let colHTML = ''
+                for (i in data){
+                    colHTML += '<div class="col-sm-3">'
+                    colHTML += '<a href="/detail_buku/' + data[i].id_buku + '" class="text-secondary">';
+                    colHTML += '<div class="card books-card d-flex flex-column  border-0 soft-shadow my-3">';
+                    colHTML += '<img class="card-image" src="' + path + '/' + data[i].gambar + '" alt="buku">';
+                    colHTML += '<div class="books-capt p-4 d-flex flex-column">';
+                    colHTML += '<strong>' + data[i].judul +'</strong>';
+                    colHTML += '<span>Penerbit : ' + data[i].penerbit + '</span>';
+                    colHTML += '<span>Stok : ' + data[i].stok + '</span>';
+                    colHTML += '<span class="small">' + data[i].tahun_terbit + '-' + data[i].isbn + '</span>';
+                    colHTML += ' </div>';
+                    colHTML += ' </div>';
+                    colHTML += ' </a>';
+                    colHTML += '</div>';
+                }
+                $('#buku-wrapper').html(colHTML);
+            }
+            , error: function(err){
+                console.log(err);
+            }
+            ,beforeSend: function(){
+                $('#loading').children().css('display','block');
+                $('#buku-wrapper').html('');
+            },
+            complete: function(){
+                $('#loading').children().css('display','none');
+            },
+        })
+    })
 
     $('#btn-search').on('click',function(){
         $('#form-pencarian').css('opacity','1');
