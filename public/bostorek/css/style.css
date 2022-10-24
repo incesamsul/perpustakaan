@@ -860,7 +860,7 @@ a:focus {
     overflow: hidden;
 }
 
-.card-image{
+.card-image {
     max-height: 270px;
     object-fit: fit;
 }
@@ -887,9 +887,7 @@ a:focus {
 }
 
 @media only screen and (min-width: 600px) {
-    .only-mobile{
+    .only-mobile {
         display: none;
     }
 }
-
-

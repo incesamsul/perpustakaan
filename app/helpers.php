@@ -1,5 +1,11 @@
 <?php
 
+
+use App\Models\FavoritModel;
+use App\Models\KategoriModel;
+use App\Models\LogAktivitasModel;
+use App\Models\Member;
+
 use App\Models\Pinjam;
 use App\Models\LogAktivitasModel;
 use Illuminate\Support\Facades\DB;
@@ -8,6 +14,7 @@ use phpDocumentor\Reflection\Types\Null_;
 use PhpParser\Node\Expr\FuncCall;
 
 use function PHPUnit\Framework\isNull;
+
 
 
 function getLastSegment(){
@@ -20,6 +27,11 @@ function getLastSegment(){
         }
         return $segmentPinjam;
 
+}
+function getJumlahMemberPerBulan($bulan)
+{
+    return Member::whereMonth('created_at', '=', $bulan)
+        ->get();
 }
 
 function dateDiff($tgl_mulai, $tgl_akhir)

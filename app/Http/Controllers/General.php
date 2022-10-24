@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Buku;
+use App\Models\Member;
+use App\Models\Pinjam;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Filesystem\Filesystem;
@@ -20,6 +22,10 @@ class General extends Controller
 
     public function dashboard()
     {
+        $data['member'] = Member::all();
+        $data['dipinjam'] = Pinjam::where('status', 'diambil')->get();
+        $data['dikembalikan'] = Pinjam::where('status', 'selesai')->get();
+        $data['totalBuku'] = Buku::all();
         $data['headerTitle'] = 'Dashboard';
         $data['headerSubTitle'] = 'Selamat Datang | Aplikasi perpustakaan';
         return view('pages.dashboard.index', $data);
