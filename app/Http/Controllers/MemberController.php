@@ -23,7 +23,7 @@ class MemberController extends Controller
         $user = User::create([
             'name' => $request->nama_member,
             'email' => $request->email,
-            'password' => bcrypt($request->email),
+            'password' => bcrypt('12345'),
             'role' => 'anggota',
         ]);
 
@@ -47,7 +47,7 @@ class MemberController extends Controller
         User::where('id', $idUser)->update([
             'name' => $request->nama_member,
             'email' => $request->email,
-            'password' => bcrypt($request->email),
+            'password' => bcrypt('12345'),
         ]);
 
         $member->update([

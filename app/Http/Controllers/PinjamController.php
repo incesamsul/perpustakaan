@@ -20,6 +20,14 @@ class PinjamController extends Controller
     {
         $dataCheckout = json_decode($request->checkout);
 
+        $segment = Pinjam::latest()->first();
+        $segmentPinjam = 0;
+        if(!$segment){
+            $segmentPinjam = 1;
+        } else {
+            $segmentPinjam = $segment->segment + 1;
+        }
+
         foreach ($dataCheckout as $row) {
             $buku =  Buku::where('id_buku', $row->id_buku);
             $lastCode = $buku->first()->last_code;
@@ -29,6 +37,7 @@ class PinjamController extends Controller
                 'jml_hari' => $row->jml_hari,
                 'jml_buku' => $row->jml_buku,
                 'last_code' => $lastCode,
+                'segment' => $segmentPinjam,
             ]);
 
             $lastCode = $buku->update([

@@ -1,9 +1,7 @@
 <?php
 
-use App\Models\FavoritModel;
-use App\Models\KategoriModel;
-use App\Models\LogAktivitasModel;
 use App\Models\Pinjam;
+use App\Models\LogAktivitasModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use phpDocumentor\Reflection\Types\Null_;
@@ -11,6 +9,18 @@ use PhpParser\Node\Expr\FuncCall;
 
 use function PHPUnit\Framework\isNull;
 
+
+function getLastSegment(){
+    $segment= Pinjam::orderBy('updated_at', 'desc')->first();
+        $segmentPinjam = 0;
+        if(!$segment){
+            $segmentPinjam = 1;
+        } else {
+            $segmentPinjam = $segment->segment + 1;
+        }
+        return $segmentPinjam;
+
+}
 
 function dateDiff($tgl_mulai, $tgl_akhir)
 {

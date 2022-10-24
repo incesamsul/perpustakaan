@@ -26,7 +26,7 @@
                         <input type="text" class="form-control card-form-header  mr-3" placeholder="Cari Data  ..." id="searchbox">
                     </div>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body p-0 table-responsive">
                     <table class="table table-striped table-hover table-buku table-action-hover" id="table-data">
                         <thead>
                             <tr>
@@ -35,11 +35,12 @@
                                 <td>Nama</td>
                                 <td>Nisn</td>
                                 <td>Kode buku</td>
-                                <td>Pengarang</td>
-                                <td>Tahun Terbit</td>
-                                <td>Penerbit</td>
+                                <td>Tgl Pinjam</td>
+                                <td>Jml hari</td>
                                 <td>Status</td>
+                                @if($headerTitle == 'Peminjaman')
                                 <td>aksi</td>
+                                @endif
                                 <td></td>
                             </tr>
                         </thead>
@@ -59,9 +60,8 @@
                                         @endfor
                                         </div>
                                     </td>
-                                    <td>{{ $row->buku->pengarang }}</td>
-                                    <td>{{ $row->buku->tahun_terbit }}</td>
-                                    <td>{{ $row->buku->penerbit }}</td>
+                                    <td>{{ $row->tgl_pinjam == '' ? 'none' : $row->tgl_pinjam  }}</td>
+                                    <td>{{ $row->user->pinjam->jml_hari }} Hari</td>
                                     <td>
                                         @if($row->status == 'diambil')
                                         <span class="badge badge-primary">diambil</span>
@@ -69,7 +69,13 @@
                                         <span class="badge badge-success">selesai</span>
                                         @endif
                                     </td>
+                                    @if($headerTitle == 'Peminjaman')
                                     <td>
+                                        <?php
+                                        $tglKembali = $row->tgl_kembali == null ? $tanggal_hari_ini : $row->tgl_kembali;
+                                        
+                                        $jmlTerlambat = dateDiff($row->tgl_pinjam,$tglKembali) - $row->jml_hari;
+                                        ?>
                                         <?php
                                             $noHp = $row->user->member->no_hp;
                                             $terlambat = $jmlTerlambat < 0 ? '0' : $jmlTerlambat;
@@ -78,6 +84,7 @@
                                         ?>
                                         <a href="https://web.whatsapp.com/send?phone={{ $noHp }}&text={{ $message }}" target="_blank" class="btn btn-success"><i class="fab fa-whatsapp"></i></button>
                                     </td>
+                                    @endif
                                     <td class="option">
                                         <div class="btn-group dropleft btn-option">
                                             <i type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

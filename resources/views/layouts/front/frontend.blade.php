@@ -59,7 +59,13 @@
                 @endif
 
             </a>
+            @if(auth()->user())
+            <a class="text-inherit" href="{{ URL::to('/login') }}"><i class="fas fa-user"></i> <span>{{ auth()->user()->name }}</span></a>
+            
+            @else
             <a class="text-inherit" href="{{ URL::to('/login') }}"><i class="fas fa-user"></i></a>
+            @endif
+
         </div>
     </nav>
     <header class="header_section">

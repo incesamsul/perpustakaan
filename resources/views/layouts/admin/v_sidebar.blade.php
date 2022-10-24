@@ -82,7 +82,7 @@
 								<p>Buku</p>
 							</a>
 						</li>
-                        <li class="nav-item" id="liPinjamkan">
+                        <!-- <li class="nav-item" id="liPinjamkan">
 							<a href="{{ URL::to('/admin/pinjamkan') }}" class="collapsed" >
 								<i class="fas fa-calendar"></i>
 								<p>Peminjaman</p>
@@ -93,7 +93,7 @@
 								<i class="fas fa-calendar"></i>
 								<p>Pengembalian</p>
 							</a>
-						</li>
+						</li> -->
 
 
 
@@ -132,6 +132,12 @@
 								<p>Denda</p>
 							</a>
 						</li>
+						<li class="nav-item" id="liPengunjung">
+							<a href="{{ URL::to('/pengunjung') }}" class="collapsed" >
+								<i class="fas fa-qrcode"></i>
+								<p>Pengunjung</p>
+							</a>
+						</li>
                         @endif
 
                         @if (auth()->user()->role == 'Administrator' || auth()->user()->role == 'pustakawan')
@@ -139,12 +145,6 @@
 							<a href="{{ URL::to('/admin/anggota') }}" class="collapsed" >
 								<i class="fas fa-user"></i>
 								<p>Anggota</p>
-							</a>
-						</li>
-                        <li class="nav-item" id="liPengunjung">
-							<a href="{{ URL::to('/pengunjung') }}" class="collapsed" >
-								<i class="fas fa-qrcode"></i>
-								<p>Pengunjung</p>
 							</a>
 						</li>
                         <li class="nav-item" id="liDaftarPengunjung">

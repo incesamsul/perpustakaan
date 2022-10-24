@@ -20,6 +20,7 @@ class CreatePinjamTable extends Migration
             $table->integer('jml_hari');
             $table->integer('jml_buku');
             $table->enum('status', ['blm_diambil', 'diambil', 'selesai'])->default('blm_diambil');
+            $table->integer('segment')->default('0');
             $table->date('tgl_pinjam')->nullable();
             $table->date('tgl_kembali')->nullable();
             $table->string('last_code');

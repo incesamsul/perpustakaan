@@ -40,6 +40,9 @@ class Admin extends Controller
         $data['headerSubTitle'] = 'Selamat Datang | Aplikasi perpustakaan';
         $data['sidebar'] = 'liPinjamkan';
         $data['buku'] = Pinjam::where('status', 'diambil')->get();
+        $timezone = 'Asia/Makassar';
+        $date = new DateTime('now', new DateTimeZone($timezone));
+        $data['tanggal_hari_ini'] = $date->format('Y-m-d');
         return view('pages.pinjamkan.index', $data);
     }
 
@@ -60,7 +63,8 @@ class Admin extends Controller
         $data['headerTitle'] = 'Pengembalian';
         $data['headerSubTitle'] = 'Selamat Datang | Aplikasi perpustakaan';
         $data['sidebar'] = 'liPengembalian';
-        $data['buku'] = Pinjam::where('status', 'selesai')->get();
+        $lastSegment = getLastSegment() -1;
+        $data['buku'] = Pinjam::where('status', 'selesai')->where('segment',$lastSegment)->get();
         return view('pages.pinjamkan.index', $data);
     }
 
@@ -87,6 +91,13 @@ class Admin extends Controller
         $tanggal = $date->format('Y-m-d');
         $localTime = $date->format('H:i:s');
 
+        $segment= Pinjam::latest()->first();
+        $segmentPinjam = 0;
+        if(!$segment){
+            $segmentPinjam = 1;
+        } else {
+            $segmentPinjam = $segment->segment + 1;
+        }
         $pinjam = Pinjam::where('id_user', $idUser)->where('status', 'diambil');
 
         
@@ -104,6 +115,7 @@ class Admin extends Controller
 
         $pinjam->update([
             'status' => 'selesai',
+            'segment' => $segmentPinjam,
             'tgl_kembali' => $tanggal
         ]);
         return redirect()->back()->with('message', 'buku berhasil kembalian');
@@ -154,7 +166,7 @@ class Admin extends Controller
         User::create([
             'name' => $request->nama,
             'email' => $request->email,
-            'password' => bcrypt($request->email),
+            'password' => bcrypt('12345'),
             'role' => $request->tipe_pengguna,
         ]);
         return redirect('/admin/pengguna')->with('message', 'Pengguna Berhasil di tambahkan');
