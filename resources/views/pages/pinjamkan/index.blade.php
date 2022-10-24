@@ -24,7 +24,11 @@
                     <h4>Data Buku pinjaman siswa</h4>
                     <div class="table-tools d-flex justify-content-around ">
                         <input type="text" class="form-control card-form-header  mr-3" placeholder="Cari Data  ..." id="searchbox">
-                        <a href="{{ URL::to('/admin/cetak_peminjaman') }}" class="btn btn-primary"><i class="fas fa-print"></i></a>
+                        @if($headerTitle != 'Peminjaman')
+                        <a href="{{ URL::to('/admin/cetak_pengembalian') }}" class="btn btn-primary"><i class="fas fa-print"></i></a>
+                        @else<!-- 
+                        <a href="{{ URL::to('/admin/cetak_pengembalian') }}" class="btn btn-success"><i class="fas fa-print"></i></a> -->
+                        @endif
                     </div>
                 </div>
                 <div class="card-body p-0 table-responsive">

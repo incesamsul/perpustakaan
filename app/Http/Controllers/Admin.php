@@ -49,8 +49,35 @@ class Admin extends Controller
 
     public function cetakPeminjaman()
     {
-
+        $timezone = 'Asia/Makassar';
+        $date = new DateTime('now', new DateTimeZone($timezone));
         $data['buku'] = Pinjam::where('status', 'diambil')->get();
+        $data['tanggal_hari_ini'] = $date->format('Y-m-d');
+        $html = view('pages.cetak.peminjaman', $data);
+
+        // instantiate and use the dompdf class
+        $dompdf = new Dompdf();
+
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('Legal', 'potrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream("peminjaman.pdf", array("Attachment" => false));
+        exit(0);
+    }
+
+    public function cetakPengembalian()
+    {
+
+        $timezone = 'Asia/Makassar';
+        $date = new DateTime('now', new DateTimeZone($timezone));
+        $data['buku'] = Pinjam::where('status', 'selesai')->get();
+        $data['tanggal_hari_ini'] = $date->format('Y-m-d');
         $html = view('pages.cetak.peminjaman', $data);
 
         // instantiate and use the dompdf class

@@ -31,7 +31,7 @@
                           <p>email : {{ auth()->user()->email }}</p>
                           <p>nomor induk : {{ auth()->user()->member->nomor_induk }}</p>
                           <p>alamat : {{ auth()->user()->member->alamat }}</p>
-                          <p>nomor hp : {{ auth()->user()->member->no_Hp }}</p>
+                          <p>nomor hp : {{ auth()->user()->member->no_hp }}</p>
                           <p>kelas : {{ auth()->user()->member->kelas }}</p>
                     </div>
                 </div>

@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         $data['title'] = 'Belum diambil';
         $data['url'] = 'belum_diambil';
-        $data['buku'] = Pinjam::where('status', 'blm_diambil')->get();
+        $data['buku'] = Pinjam::where('status', 'blm_diambil')->where('id_user',auth()->user()->id)->get();
         $timezone = 'Asia/Makassar';
         $date = new DateTime('now', new DateTimeZone($timezone));
         $data['tanggal_hari_ini'] = $date->format('Y-m-d');
@@ -33,7 +33,7 @@ class UserController extends Controller
         $localTime = $date->format('H:i:s');
         $data['title'] = 'Sudah diambil';
         $data['url'] = 'sudah_diambil';
-        $data['buku'] = Pinjam::where('status', 'diambil')->get();
+        $data['buku'] = Pinjam::where('status', 'diambil')->where('id_user',auth()->user()->id)->get();
         return view('halaman_depan.buku_pinjaman', $data);
     }
 
@@ -41,7 +41,7 @@ class UserController extends Controller
     {
         $data['url'] = 'pinjaman_selesai';
         $data['title'] = 'Selesai dipinjam';
-        $data['buku'] = Pinjam::where('status', 'selesai')->get();
+        $data['buku'] = Pinjam::where('status', 'selesai')->where('id_user',auth()->user()->id)->get();
         $timezone = 'Asia/Makassar';
         $date = new DateTime('now', new DateTimeZone($timezone));
         $data['tanggal_hari_ini'] = $date->format('Y-m-d');

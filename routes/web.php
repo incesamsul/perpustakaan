@@ -83,6 +83,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator,pustakawan']], fu
         Route::get('/pengembalian', [Admin::class, 'pengembalian']);
         Route::get('/denda', [Admin::class, 'denda']);
         Route::get('/cetak_peminjaman', [Admin::class, 'cetakPeminjaman']);
+        Route::get('/cetak_pengembalian', [Admin::class, 'cetakPengembalian']);
 
         // CRUD KATEGORI
         Route::get('/anggota', [MemberController::class, 'index']);

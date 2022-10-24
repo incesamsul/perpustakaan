@@ -15,10 +15,12 @@
         }
 
         .logo {
+            
             float: left;
-            margin-bottom: 15px;
+            /*margin-bottom: 15px;
             margin-right: 5px;
-            margin-left: 100px;
+            background:red;
+            margin-left: 100px;*/
         }
 
         .clearfix::after {
@@ -28,12 +30,16 @@
         }
 
         .header {
+            position: relative;
+            /*background-color: blue;*/
             color: #000000;
             border-bottom: 4px double #000000;
             margin-bottom: 10px;
         }
 
         .header-text {
+            /*background-color: green;*/
+            margin-right: 100px;
             text-align: center;
         }
 
@@ -78,13 +84,13 @@
                 <img src="{{'data:image/png;base64,' . base64_encode(file_get_contents('img/smak.png'))}}" alt="image" width="100">
             </div>
             <div class="header-text">
-                <br><br>
+                <br>
                 <h4>Perpustakaan SMKN 7 Pangkep</h4>
                 <p>Jl. Andi Muri Dg Lulu, Balanakang, Jagong, Kec. Pangkajene, Kabupaten Pangkajene Dan Kepulauan, Sulawesi Selatan 90612
                 </p>
             </div>
         </div>
-        <h4 class="text-center">Laporan Peminjaman</h4>
+        <h4 class="text-center">Laporan Transaksi</h4>
 
         <table class="full-width mt-10 mb-30" border="1" cellspacing="0" cellpadding="5">
             <thead>
@@ -98,6 +104,10 @@
                     <td>Tahun Terbit</td>
                     <td>Penerbit</td>
                     <td>Status</td>
+                    <td>Tgl pinjam</td>
+                    <td>Tgl kembali</td>
+                    <td>Terlambat</td>
+                    <td>Denda</td>
                 </tr>
             </thead>
             <tbody>
@@ -108,13 +118,9 @@
                         <td>{{ $row->user->name  }}</td>
                         <td>{{ $row->user->member->nomor_induk }}</td>
                         <td>
-                            <button class="btn-unlihat btn btn-danger" style="display: none"><i class="fas fa-times"></i></button>
-                            <button class="btn-lihat btn btn-primary"><i class="fas fa-eye"></i></button>
-                            <div class="stok-wrapper" style="display: none">
                             @for ($i = $row->user->pinjam->last_code; $i<= ($row->user->pinjam->jml_buku * $row->user->pinjam->last_code); $i++)
                             {{ substr($row->buku->judul,0,3) }}-00{{ $i }} <br>
                             @endfor
-                            </div>
                         </td>
                         <td>{{ $row->buku->pengarang }}</td>
                         <td>{{ $row->buku->tahun_terbit }}</td>
@@ -126,7 +132,15 @@
                             <span class="badge badge-success">selesai</span>
                             @endif
                         </td>
-
+                        <td class="align-middle">{{ $row->tgl_pinjam == '' ? 'none' : $row->tgl_pinjam  }}</td>
+                    <td class="align-middle">{{ $row->tgl_kembali == '' ? 'none' : $row->tgl_kembali  }}</td>
+                    <?php
+                                        $tglKembali = $row->tgl_kembali == null ? $tanggal_hari_ini : $row->tgl_kembali;
+                                        
+                                        $jmlTerlambat = dateDiff($row->tgl_pinjam,$tglKembali) - $row->jml_hari;
+                                        ?>
+                    <td class="align-middle">{{ $jmlTerlambat < 0 ? '0' : $jmlTerlambat }} Hari</td>
+                    <td class="align-middle">{{ $jmlTerlambat < 0 ? '0' : 'Rp. '. number_format($jmlTerlambat * 500) }} </td>
                     </tr>
                 @endforeach
             </tbody>
