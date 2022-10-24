@@ -3,6 +3,7 @@
 use App\Models\FavoritModel;
 use App\Models\KategoriModel;
 use App\Models\LogAktivitasModel;
+use App\Models\Member;
 use App\Models\Pinjam;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
@@ -11,6 +12,12 @@ use PhpParser\Node\Expr\FuncCall;
 
 use function PHPUnit\Framework\isNull;
 
+
+function getJumlahMemberPerBulan($bulan)
+{
+    return Member::whereMonth('created_at', '=', $bulan)
+        ->get();
+}
 
 function dateDiff($tgl_mulai, $tgl_akhir)
 {

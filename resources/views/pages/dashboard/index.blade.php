@@ -32,16 +32,16 @@
                     <div class="col-md-4 d-flex flex-column justify-content-around">
                         <div>
                             <h6 class="fw-bold text-uppercase text-success op-8">Total Member</h6>
-                            <h3 class="fw-bold">210</h3>
+                            <h3 class="fw-bold">{{ count($member) }}</h3>
                         </div>
                         <div>
                             <h6 class="fw-bold text-uppercase text-danger op-8">Total Buku</h6>
-                            <h3 class="fw-bold">1203</h3>
+                            <h3 class="fw-bold">{{ count($totalBuku) }}</h3>
                         </div>
                     </div>
-                    <div class="col-md-8">
-                        <div id="chart-container">
-                            <canvas id="totalIncomeChart"></canvas>
+                    <div class="col-md-8  text-center">
+                        <div id="chart-container ">
+                            <i class="fas fa-chart-bar " style="font-size: 140px"></i>
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
             </div>
             <div class="card-body pb-0">
                 <div class="mb-4 mt-2">
-                    <h1>29</h1>
+                    <h1>{{ count($dipinjam) }}</h1>
                 </div>
                 <div class="pull-in">
                     <canvas id="dailySalesChart"></canvas>
@@ -97,7 +97,7 @@
         <div class="card">
             <div class="card-body pb-0">
                 <div class="h1 fw-bold float-right text-warning">+7%</div>
-                <h2 class="mb-2">21</h2>
+                <h2 class="mb-2"><h1>{{ count($dikembalikan) }}</h1></h2>
                 <p class="text-muted">Buku dikembalikan</p>
                 <div class="pull-in sparkline-fix">
                     <div id="lineChart"></div>
@@ -119,10 +119,10 @@
 		Circles.create({
 			id:'circles-1',
 			radius:45,
-			value:60,
+			value:100,
 			maxValue:100,
 			width:7,
-			text: 5,
+			text: '{{ count($member) }}',
 			colors:['#f1f1f1', '#FF9E27'],
 			duration:400,
 			wrpClass:'circles-wrp',
@@ -134,10 +134,10 @@
 		Circles.create({
 			id:'circles-2',
 			radius:45,
-			value:70,
-			maxValue:100,
+			value:'{{ count($dipinjam) }}',
+			maxValue:'{{ count($totalBuku) }}',
 			width:7,
-			text: 36,
+			text: '{{ count($dipinjam) }}',
 			colors:['#f1f1f1', '#2BB930'],
 			duration:400,
 			wrpClass:'circles-wrp',
@@ -149,10 +149,10 @@
 		Circles.create({
 			id:'circles-3',
 			radius:45,
-			value:40,
-			maxValue:100,
+			value:'{{ count($dikembalikan) }}',
+			maxValue:'{{ count($totalBuku) }}',
 			width:7,
-			text: 12,
+			text: '{{ count($dikembalikan) }}',
 			colors:['#f1f1f1', '#F25961'],
 			duration:400,
 			wrpClass:'circles-wrp',
@@ -161,44 +161,6 @@
 			styleText:true
 		})
 
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "member",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
-			}
-		});
 
 		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
 			type: 'line',
@@ -267,28 +229,43 @@ var statisticsChart = new Chart(ctx, {
 			legendColor: '#f3545d',
 			fill: true,
 			borderWidth: 2,
-			data: [154, 184, 175, 203, 210, 231, 240, 278, 252, 312, 320, 374]
-		}, {
-			label: "Member baru",
-			borderColor: '#fdaf4b',
-			pointBackgroundColor: 'rgba(253, 175, 75, 0.6)',
-			pointRadius: 0,
-			backgroundColor: 'rgba(253, 175, 75, 0.4)',
-			legendColor: '#fdaf4b',
-			fill: true,
-			borderWidth: 2,
-			data: [256, 230, 245, 287, 240, 250, 230, 295, 331, 431, 456, 521]
-		}, {
-			label: "Member aktif",
-			borderColor: '#177dff',
-			pointBackgroundColor: 'rgba(23, 125, 255, 0.6)',
-			pointRadius: 0,
-			backgroundColor: 'rgba(23, 125, 255, 0.4)',
-			legendColor: '#177dff',
-			fill: true,
-			borderWidth: 2,
-			data: [542, 480, 430, 550, 530, 453, 380, 434, 568, 610, 700, 900]
-		}]
+			data: [
+                '{{ count(getJumlahMemberPerBulan(1)) }}',
+                '{{ count(getJumlahMemberPerBulan(2)) }}',
+                '{{ count(getJumlahMemberPerBulan(3)) }}',
+                '{{ count(getJumlahMemberPerBulan(4)) }}',
+                '{{ count(getJumlahMemberPerBulan(5)) }}',
+                '{{ count(getJumlahMemberPerBulan(6)) }}',
+                '{{ count(getJumlahMemberPerBulan(7)) }}',
+                '{{ count(getJumlahMemberPerBulan(8)) }}',
+                '{{ count(getJumlahMemberPerBulan(9)) }}',
+                '{{ count(getJumlahMemberPerBulan(10)) }}',
+                '{{ count(getJumlahMemberPerBulan(11)) }}',
+                '{{ count(getJumlahMemberPerBulan(12)) }}',
+            ]
+		},
+        // {
+		// 	label: "Member baru",
+		// 	borderColor: '#fdaf4b',
+		// 	pointBackgroundColor: 'rgba(253, 175, 75, 0.6)',
+		// 	pointRadius: 0,
+		// 	backgroundColor: 'rgba(253, 175, 75, 0.4)',
+		// 	legendColor: '#fdaf4b',
+		// 	fill: true,
+		// 	borderWidth: 2,
+		// 	data: [256, 230, 245, 287, 240, 250, 230, 295, 331, 431, 456, 521]
+		// }, {
+		// 	label: "Member aktif",
+		// 	borderColor: '#177dff',
+		// 	pointBackgroundColor: 'rgba(23, 125, 255, 0.6)',
+		// 	pointRadius: 0,
+		// 	backgroundColor: 'rgba(23, 125, 255, 0.4)',
+		// 	legendColor: '#177dff',
+		// 	fill: true,
+		// 	borderWidth: 2,
+		// 	data: [542, 480, 430, 550, 530, 453, 380, 434, 568, 610, 700, 900]
+		// },
+    ]
 	},
 	options : {
 		responsive: true,
