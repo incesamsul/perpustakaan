@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Pinjam;
 use DateTime;
 use DateTimeZone;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -44,6 +45,28 @@ class Admin extends Controller
         $date = new DateTime('now', new DateTimeZone($timezone));
         $data['tanggal_hari_ini'] = $date->format('Y-m-d');
         return view('pages.pinjamkan.index', $data);
+    }
+
+    public function cetakPeminjaman()
+    {
+
+        $data['buku'] = Pinjam::where('status', 'diambil')->get();
+        $html = view('pages.cetak.peminjaman', $data);
+
+        // instantiate and use the dompdf class
+        $dompdf = new Dompdf();
+
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('Legal', 'potrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream("peminjaman.pdf", array("Attachment" => false));
+        exit(0);
     }
 
     public function denda()
@@ -100,7 +123,7 @@ class Admin extends Controller
         }
         $pinjam = Pinjam::where('id_user', $idUser)->where('status', 'diambil');
 
-        
+
         foreach ($pinjam->get() as $row) {
             $buku = Buku::where('id_buku', $row->buku->id_buku);
             $stokBuku = $buku->first()->stok;
